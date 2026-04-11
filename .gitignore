@@ -1,0 +1,8 @@
+*.mp4
+*.mkv
+*.avi
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.vscode/

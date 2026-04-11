@@ -1,0 +1,261 @@
+MASTER BUILD PROMPT — CodeCollab (Web Platform)
+Product Name
+
+CodeCollab
+
+Tagline
+
+“A curated open-source collaboration platform for students”
+
+Product Overview
+
+Build a web-based platform called CodeCollab that enables students to discover, join, and collaborate on open-source projects in a structured and beginner-friendly environment.
+
+This platform is not a replacement for GitHub. It acts as a discovery and collaboration layer on top of GitHub, simplifying project participation and visibility for students.
+
+The primary goal is to reduce friction in finding and contributing to real-world projects while enabling project owners to manage contributors efficiently.
+
+Core User Roles
+Visitor (not logged in)
+Authenticated User
+Project Contributor
+Project Admin (Owner)
+Core Features
+1. Home Page (Primary Entry Point)
+
+The home page must directly display project cards without unnecessary landing sections.
+
+Layout:
+
+Top navigation bar (Logo, Login/Profile)
+Filter/search bar (sticky)
+Grid of project cards
+
+No heavy hero section. The focus is immediate project discovery.
+
+2. Project Cards (Main UI Element)
+
+Each project card must contain:
+
+Project title
+Short description (max 2 lines)
+Tech stack tags (React, Python, etc.)
+Progress indicator (percentage or bar)
+Number of contributors
+GitHub icon/button (external link)
+“View Project” button
+
+Design:
+
+Glassmorphism card style
+Subtle gradient background
+Hover effect (scale + glow)
+3. Project Detail Page
+
+Layout: Two-column responsive design
+
+Left Section:
+
+Project title
+Full description
+Tech stack tags
+GitHub repository link
+Project progress (visual bar)
+Optional: screenshots or media
+
+Right Section (sticky panel):
+
+Join Project button
+Contributors list (avatars + names)
+Discord invite link (if provided)
+4. Join Project System
+
+Flow:
+
+User clicks “Join Project”
+A join request is created with status “pending”
+Admin reviews request
+
+Admin Actions:
+
+Accept → user becomes contributor
+Reject → request closed
+
+Constraints:
+
+Prevent duplicate requests
+Show request status to user
+5. Role Management System
+
+Roles:
+
+Admin
+Contributor
+
+Admin Capabilities:
+
+Approve/reject join requests
+Promote contributors to admin
+Edit project details
+
+Contributor Capabilities:
+
+View project details
+Be listed publicly
+6. Project Dashboard
+
+Accessible only to authenticated users
+
+Admin View:
+List of contributors
+Pending join requests
+Role assignment controls
+Edit project details
+Basic stats (number of contributors, progress)
+User View:
+List of joined projects
+Status of join requests (pending/accepted/rejected)
+7. GitHub Integration
+
+Input:
+
+GitHub repository URL
+
+Fetch using GitHub API:
+
+Repository name
+Stars count
+Fork count
+Optional: contributors list
+
+Display this data on the project detail page.
+
+8. Coding Buddy System
+
+Users can:
+
+Follow/unfollow other users
+
+User Profile:
+
+Name
+Avatar
+Projects joined
+Optional: skill tags
+9. External Collaboration
+
+Each project can include:
+
+Discord server invite link
+
+Do not build internal chat functionality.
+
+UI/UX Design System
+Color Palette
+Dark Base (Background)
+#021F2C
+#04313D
+#064A55
+Mid Tones (Primary UI Elements)
+#0C6A6E
+#128C88
+#1FA5A0
+Highlights (Accents / CTA)
+#4FC3B3
+#7FE0C8
+#AEEFE0
+Design Guidelines
+Theme: Dark, premium, minimal
+Use gradient backgrounds (top lighter, bottom darker)
+Glassmorphism cards with backdrop blur
+Rounded corners (12px–16px)
+Soft shadows and subtle borders
+Smooth hover animations
+Avoid clutter and over-design
+Key Pages
+Home (project grid + filters)
+Project Detail Page
+Dashboard (admin/user views)
+User Profile
+Tech Stack
+
+Frontend:
+
+Next.js (App Router)
+Tailwind CSS
+
+Backend:
+
+Next.js API routes or Node.js with Express
+
+Database:
+
+PostgreSQL
+
+Authentication:
+
+Firebase Auth or Clerk
+
+External APIs:
+
+GitHub REST API
+Database Schema (High-Level)
+
+Users:
+
+id
+name
+email
+avatar
+
+Projects:
+
+id
+title
+description
+github_url
+created_by
+
+ProjectMembers:
+
+user_id
+project_id
+role (admin/contributor)
+
+JoinRequests:
+
+user_id
+project_id
+status (pending/accepted/rejected)
+
+Followers:
+
+follower_id
+following_id
+Core Logic Flows
+Project Creation
+User creates project
+Automatically assigned as admin
+Join Project
+Create join request entry
+Admin approves/rejects
+On approval → add to ProjectMembers
+Role Promotion
+Admin updates contributor role to admin
+Constraints
+Do not build:
+Internal chat system
+Complex task management system
+GitHub-like code hosting features
+Keep the system focused on:
+Discovery
+Collaboration
+Contribution visibility
+Success Criteria
+Users can discover projects instantly from homepage
+Joining a project takes minimal steps
+Contributors are visibly recognized
+Admins can manage projects without friction
+Final Instruction
+
+Build this as a clean, scalable MVP web platform with strong focus on usability, simplicity, and performance. Avoid unnecessary features and prioritize real working flows that solve the problem of discovering and collaborating on open-source projects efficiently.

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Project | CodeCollab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="add project page ka design CSS file.css">
+</head>
+<body>
+
+    <div class="container">
+        <a href="../code collab main page.html" style="color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; display: inline-block;">← Back to Home</a>
+        
+        <div class="glass-card">
+            <h1>Launch Your Project</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Fill in the details to list your project on CodeCollab.</p>
+            
+            <div class="preview-container" id="image-preview">
+                <span>Image Preview Will Appear Here</span>
+                <img id="preview-img" src="" alt="Preview">
+            </div>
+
+            <form id="add-project-form">
+                <div class="form-group">
+                    <label for="p-title">Project Title</label>
+                    <input type="text" id="p-title" placeholder="e.g. HealthTracker AI" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-category">Category</label>
+                    <select id="p-category">
+                        <option value="Web">Web Development</option>
+                        <option value="AI">Artificial Intelligence</option>
+                        <option value="Security">Cyber Security</option>
+                        <option value="Design">UI/UX Design</option>
+                        <option value="Systems">Systems Programming</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-image">Project Cover Image (URL)</label>
+                    <input type="url" id="p-image" placeholder="https://images.unsplash.com/..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-github">GitHub Repository Link (URL)</label>
+                    <input type="url" id="p-github" placeholder="https://github.com/profile/repo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-tech">Tech Stack (comma separated)</label>
+                    <input type="text" id="p-tech" placeholder="React, Python, Firebase" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-desc">Short Description</label>
+                    <textarea id="p-desc" rows="3" placeholder="Explain what your project solves..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="p-progress">Current Progress (%)</label>
+                    <input type="number" id="p-progress" min="0" max="100" value="0">
+                </div>
+
+                <button type="submit" class="btn-submit">Add Project to Platform</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="add project page ka logic Javascript file.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCollab | Student Open Source Platform</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Link to the CSS file with your requested name -->
+    <link rel="stylesheet" href="main page ka design CSS file.css">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+    </div>
+
+    <!-- Background Animated Blobs -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">CodeCollab</div>
+        <div class="nav-links">
+            <a href="user_dashboard_system/dashboard page.html">Dashboard</a>
+            <a href="#">Join us</a>
+            <a href="#" style="color: var(--accent);">Login</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1 class="reveal-text">Build the Future, <br><span style="color: var(--accent);">Together.</span></h1>
+        <p class="reveal-text" style="animation-delay: 0.2s;">
+            A curated open-source collaboration platform specifically designed for students. 
+            Discover projects, find your coding buddy, and start contributing today.
+        </p>
+        <div class="reveal-text" style="animation-delay: 0.4s;">
+            <!-- Navigate to Add Project Page -->
+            <button onclick="window.location.href='admin_and_user_settings/add project page.html'" class="filter-btn active" style="padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600;">+ Add Project</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container" id="discovery-area">
+        <!-- Search and Filter Bar -->
+        <div class="reveal-text" style="animation-delay: 0.6s; margin-bottom: 3rem;">
+            <div style="max-width: 600px; margin: 0 auto 2rem; position: relative;">
+                <input type="text" id="project-search" placeholder="Search for projects, tech, or keywords..." 
+                    style="width: 100%; padding: 1.2rem 1.5rem; border-radius: 15px; background: var(--glass); border: 1px solid var(--glass-border); color: white; font-size: 1rem; backdrop-filter: blur(10px);">
+                <span style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
+            </div>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Web</button>
+                <button class="filter-btn">AI</button>
+                <button class="filter-btn">Security</button>
+                <button class="filter-btn">Design</button>
+                <button class="filter-btn">Systems</button>
+            </div>
+        </div>
+
+        <!-- Project Grid -->
+        <div id="project-grid" class="grid">
+            <!-- Projects will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 4rem; color: var(--text-muted); opacity: 0.6; font-size: 0.9rem;">
+        <p>&copy; 2026 CodeCollab. Built with &hearts; for students.</p>
+    </footer>
+
+    <!-- Database and Logic -->
+    <script src="data/project_database_file.js"></script>
+    <script src="main page ka backend Javascript file.js"></script>
+</body>
+</html>

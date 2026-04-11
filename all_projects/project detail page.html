@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | CodeCollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="project detail page ka design CSS file.css">
+</head>
+<body>
+
+    <div class="cursor"></div>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav>
+        <a href="../code collab main page.html" class="logo">CodeCollab</a>
+        <div class="nav-links">
+            <a href="../user_dashboard_system/dashboard page.html" style="color: var(--accent); text-decoration: none; margin-right: 20px;">My Dashboard</a>
+            <a href="../code collab main page.html" style="color: var(--text-muted); text-decoration: none;">Back to Projects</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Main Detail Section -->
+        <div class="glass-panel reveal">
+            <div class="detail-header">
+                <img id="project-img" src="" alt="Project Image">
+                <h1 id="project-title">Project Title</h1>
+                <div class="meta" id="project-tags">
+                    <!-- Tags injected here -->
+                </div>
+            </div>
+            <div class="description" id="project-desc">
+                <!-- Description injected here -->
+            </div>
+        </div>
+
+        <!-- Sidebar Section -->
+        <aside class="sidebar reveal" style="animation-delay: 0.2s;">
+            <div class="glass-panel">
+                <div class="stats">
+                    <div class="stat-box">
+                        <span class="stat-val" id="stars-count">0</span>
+                        <span class="stat-label">Stars</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="contributors-count">0</span>
+                        <span class="stat-label">Contributors</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Development Progress</p>
+                    <div style="height: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; overflow: hidden;">
+                        <div id="progress-bar-inner" style="height: 100%; background: var(--accent); width: 60%;"></div>
+                    </div>
+                    <p style="text-align: right; margin-top: 0.5rem; color: var(--accent); font-weight: 700;" id="progress-pct">0%</p>
+                </div>
+
+                <button class="btn-primary">Join This Project</button>
+                <button class="btn-outline">View on GitHub</button>
+
+                <div class="contributor-list">
+                    <h4 style="margin-bottom: 1rem;">Core Maintainers</h4>
+                    <div class="contributor">
+                        <div class="avatar"><img src="https://i.pravatar.cc/150?u=1" alt=""></div>
+                        <span>Alex Rivers</span>
+                    </div>
+                    <div class="contributor">
+                        <div class="avatar"><img src="https://i.pravatar.cc/150?u=2" alt=""></div>
+                        <span>Sarah Chen</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="../data/project_database_file.js"></script>
+    <script src="project detail page ka logic Javascript file.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+ID,Project_Title,Category,Tech_Stack,Progress,Stars,Description
+1,SwiftTrack Logistics,Web,React|Node|Leaflet,65%,420,Delivery tracking system
+2,EcoPulse AI,AI,Python|TensorFlow|D3.js,40%,156,Energy consumption analyzer
+3,SecurePass Vault,Security,Rust|Solidity|Tailwind,85%,890,Decentralized password manager
+4,Harmony UI Kit,Design,JS|CSS|Figma,92%,1.2k,Accessibility-focused UI kit
+5,CodeConnect,Web,Socket.io|React|Node,55%,560,Pair programming platform
+6,Nebula OS,Systems,Canvas|Wasm|JS,30%,310,Web-based OS concept

@@ -1,0 +1,83 @@
+/* 
+   File: add project page ka design CSS file.css
+   Description: Design for the project submission form
+*/
+
+:root {
+    --bg-dark: #021F2C;
+    --accent: #4FC3B3;
+    --text-main: #AEEFE0;
+    --text-muted: #7FE0C8;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+
+body { background: var(--bg-dark); color: var(--text-main); min-height: 100vh; padding: 4rem 5%; }
+
+.container { max-width: 700px; margin: 0 auto; }
+
+.glass-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 { font-size: 2.2rem; margin-bottom: 2rem; color: var(--accent); }
+
+.form-group { margin-bottom: 1.5rem; }
+
+label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+
+input, textarea, select {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus { border-color: var(--accent); outline: none; background: rgba(255,255,255,0.08); }
+
+.btn-submit {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--accent);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(79, 195, 179, 0.3); }
+
+.preview-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+    border: 2px dashed var(--glass-border);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: var(--text-muted);
+}
+
+.preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}

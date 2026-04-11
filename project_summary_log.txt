@@ -1,0 +1,53 @@
+PROJECT LOG: CodeCollab Development Summary
+DATE: 2026-04-11
+---------------------------------------------
+
+PRODUCT SUMMARY:
+CodeCollab is a premium, student-centric open-source collaboration platform. It bridges the gap between GitHub and students by providing a discovery layer and a structured join-request system.
+
+1. CORE PLATFORM ARCHITECTURE
+- Optimized for direct file execution (runnable by opening HTML files).
+- Multi-folder structure for organization:
+  - /all_projects: Detailed project templates and logic.
+  - /admin_and_user_settings: Management and personalization tools.
+  - /user_dashboard_system: Student activity tracking.
+  - /data: Centralized data storage.
+
+2. UI/UX DESIGN SYSTEM (PREMIUM AESTHETICS)
+- Theme: Deep Teal & Dark Blue (#021F2C) with Cyan accents (#4FC3B3).
+- Effects: Glassmorphism (backdrop-filter), Soft Shadows, Glow, and Smooth Transitions.
+- Animations:
+  - Animated Background Blobs.
+  - Text Reveal on page load.
+  - Custom Circular Cursor that reacts to interactive elements.
+  - Card hover scaling and image rotations.
+- Typography: Outfit (Google Fonts).
+
+3. KEY FEATURES IMPLEMENTED
+- Project Discovery: Central grid with real-time Search and Category Filtering (Web, AI, Security, Design, Systems).
+- Project details: progress tracking, tech stack tags, and maintainer lists.
+- User Dashboard: Tracks "Total Requests", "Pending", and "Accepted" projects.
+- Join Request System: Functional "Join" button that persists requests to localStorage.
+- Admin Management: Portal to Review, Approve, or Reject incoming join requests.
+- Profile Editor: Allows changing Name, Bio, and Avatar URLs with live preview.
+- Add Project Portal: User-facing form to launch new projects with GitHub links and cover photo previews.
+
+4. DATA MANAGEMENT & PERSISTENCE
+- Source of Truth: Centralized project_database_file.js inside the /data folder.
+- Excel Reference: master_data_sheet.csv created for data backup representation.
+- Dynamic Storage: Utilizes browser LocalStorage for:
+  - Join Request statuses.
+  - User Profile settings.
+  - User-Added projects (persists across sessions).
+
+5. TECHNICAL SPECIFICATIONS
+- Languages: HTML5, Vanilla CSS3, Modern JavaScript (ES6).
+- External Links: Integrated GitHub API logic via storage, Google Fonts, Unsplash / 
+Pravatar for placeholders.
+
+DEVELOPER NOTES:
+The platform is fully scalable and offline-ready. All user-added data is merged with the core 
+database automatically during page load.
+
+---------------------------------------------
+End of Project Log. Generated on 2026-04-11.

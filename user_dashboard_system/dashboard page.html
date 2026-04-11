@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CodeCollab</title>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard page ka design CSS file.css">
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <a href="../code collab main page.html" class="logo">CodeCollab</a>
+        <nav>
+            <a href="#" class="nav-item active">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="../code collab main page.html" class="nav-item">
+                <span>🔍</span> Browse Projects
+            </a>
+            <a href="../admin_and_user_settings/project management page.html" class="nav-item">
+                <span>🛠️</span> Project Management
+            </a>
+            <a href="../admin_and_user_settings/user profile editor page.html" class="nav-item">
+                <span>⚙️</span> Settings
+            </a>
+        </nav>
+        
+        <div style="margin-top: auto;">
+            <a href="#" class="nav-item" style="color: #ff5f5f;">
+                <span>🚪</span> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Section -->
+    <main class="main-content">
+        <header class="header fade-in">
+            <div>
+                <h1>Welcome back, <span id="user-name" style="color: var(--accent);">Student!</span></h1>
+                <p id="user-bio" style="color: var(--text-muted);">Here's how your project collaborations are doing.</p>
+            </div>
+            <div class="user-profile">
+                <div style="text-align: right;">
+                    <p style="font-weight: 600;">Account Menu</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Personal</p>
+                </div>
+                <img id="user-avatar" src="https://i.pravatar.cc/150?u=4" alt="Avatar" class="avatar">
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                <span class="stat-title">Total Requests</span>
+                <span class="stat-num" id="total-req">0</span>
+            </div>
+            <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                <span class="stat-title">Pending</span>
+                <span class="stat-num" id="pending-req" style="color: #ffc107;">0</span>
+            </div>
+            <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+                <span class="stat-title">Accepted</span>
+                <span class="stat-num" id="accepted-req" style="color: #28a745;">0</span>
+            </div>
+        </div>
+
+        <!-- Join Requests Section -->
+        <section class="fade-in" style="animation-delay: 0.4s;">
+            <h2 class="section-title">Your Join Requests</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requests-table-body">
+                        <!-- Content injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="dashboard page ka logic Javascript file.js"></script>
+</body>
+</html>
