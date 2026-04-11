@@ -49,5 +49,14 @@ DEVELOPER NOTES:
 The platform is fully scalable and offline-ready. All user-added data is merged with the core 
 database automatically during page load.
 
+6. FUTURE ROADMAP & PLANNED ENHANCEMENTS
+- Backend Integration: Transition from LocalStorage to a centralized database (PostgreSQL/Supabase) for cross-device synchronization and persistence.
+- GitHub OAuth Authentication: Secure user login system using GitHub accounts for verified developer profiles.
+- Live Collaboration Hub: Real-time notifications for join requests, project updates, and internal messaging markers.
+- Project Milestones: Implement a task-tracking system within project details to show real-time progress of contributions.
+- Advanced Matchmaking: AI-driven "Coding Buddy" discovery based on skill tags and project interests.
+- Deployment: Fully hosted production version with automated CI/CD pipelines.
+
 ---------------------------------------------
 End of Project Log. Generated on 2026-04-11.
+
