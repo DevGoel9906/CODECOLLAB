@@ -1,4 +1,4 @@
-# CodeCollab 🚀
+# CodeCollab 
 
 **A curated open-source collaboration platform for students.**
 
