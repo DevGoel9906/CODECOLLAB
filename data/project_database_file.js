@@ -10,31 +10,7 @@ const globalDatabase = {
     projects: [
         {
             id: 1,
-            title: "SwiftTrack Logistics",
-            category: "Web",
-            tech: ["React", "Node.js", "Leaflet"],
-            progress: 65,
-            contributors: 12,
-            stars: "420",
-            github_url: "https://github.com/codecollab/swifttrack",
-            description: "A comprehensive open-source delivery tracking system using real-time GPS data. Ideal for fleet management.",
-            image: "https://images.unsplash.com/photo-1586769852044-692d6e3703f0?auto=format&fit=crop&q=80&w=800"
-        },
-        {
-            id: 2,
-            title: "EcoPulse AI",
-            category: "AI",
-            tech: ["Python", "TensorFlow", "D3.js"],
-            progress: 40,
-            contributors: 8,
-            stars: "156",
-            github_url: "https://github.com/codecollab/ecopulse",
-            description: "AI-powered energy consumption analyzer helping households reduce their carbon footprint.",
-            image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800"
-        },
-        {
-            id: 3,
-            title: "SecurePass Vault",
+            title: "SecurePass Vault {DEMO}",
             category: "Security",
             tech: ["Rust", "Solidity", "Tailwind"],
             progress: 85,
@@ -45,8 +21,8 @@ const globalDatabase = {
             image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=800"
         },
         {
-            id: 4,
-            title: "Harmony UI Kit",
+            id: 2,
+            title: "Harmony UI Kit {DEMO}",
             category: "Design",
             tech: ["JavaScript", "CSS", "Figma"],
             progress: 92,
@@ -57,20 +33,8 @@ const globalDatabase = {
             image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800"
         },
         {
-            id: 5,
-            title: "CodeConnect",
-            category: "Web",
-            tech: ["Socket.io", "React", "MongoDB"],
-            progress: 55,
-            contributors: 30,
-            stars: "560",
-            github_url: "https://github.com/codecollab/codeconnect",
-            description: "Social platform for pair programming with real-time collaborative editor.",
-            image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
-        },
-        {
-            id: 6,
-            title: "Nebula OS",
+            id: 3,
+            title: "Nebula OS {DEMO}",
             category: "Systems",
             tech: ["Canvas API", "WebAssembly", "JS"],
             progress: 30,

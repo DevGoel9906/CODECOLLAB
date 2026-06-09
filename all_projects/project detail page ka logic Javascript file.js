@@ -33,9 +33,61 @@ document.addEventListener('DOMContentLoaded', () => {
             tagsContainer.appendChild(span);
         });
 
+        const demoPopup = document.getElementById('demo-popup');
+        const demoCloseBtn = demoPopup.querySelector('.modal-close');
+        const joinPopup = document.getElementById('join-popup');
+        const joinCloseBtn = joinPopup.querySelector('.modal-close');
+        const isDemoProject = project.demo || project.title.includes('{DEMO}');
+
+        // Populate Core Maintainers
+        const maintainersContainer = document.getElementById('maintainers-container');
+        if (project.creator) {
+            const creatorInitials = project.creator.split(' ').map(n => n[0]).join('').toUpperCase();
+            const avatarColor = `hsl(${creatorInitials.charCodeAt(0) * 20}, 70%, 60%)`;
+            
+            const creatorHTML = `
+                <div class="contributor">
+                    <div class="avatar" style="background: ${avatarColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white;">${creatorInitials}</div>
+                    <span>${project.creator}</span>
+                </div>
+            `;
+            maintainersContainer.innerHTML = creatorHTML;
+        }
+
+        function showDemoMessage() {
+            demoPopup.classList.remove('hidden');
+        }
+
+        function hideDemoMessage() {
+            demoPopup.classList.add('hidden');
+        }
+
+        demoCloseBtn.addEventListener('click', hideDemoMessage);
+        demoPopup.addEventListener('click', (event) => {
+            if (event.target === demoPopup) hideDemoMessage();
+        });
+
+        function showJoinConfirm() {
+            joinPopup.classList.remove('hidden');
+        }
+
+        function hideJoinConfirm() {
+            joinPopup.classList.add('hidden');
+        }
+
+        joinCloseBtn.addEventListener('click', hideJoinConfirm);
+        joinPopup.addEventListener('click', (event) => {
+            if (event.target === joinPopup) hideJoinConfirm();
+        });
+
         // JOIN BUTTON LOGIC
         const joinBtn = document.querySelector('.btn-primary');
         joinBtn.addEventListener('click', () => {
+            if (isDemoProject) {
+                showDemoMessage();
+                return;
+            }
+
             const stored = localStorage.getItem('codecollab_requests');
             let requests = stored ? JSON.parse(stored) : [
                 { id: 101, project: "SwiftTrack Logistics", date: "2026-04-05", status: "Accepted" },
@@ -58,13 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 joinBtn.textContent = "Request Sent!";
                 joinBtn.style.background = "#0C6A6E";
                 joinBtn.disabled = true;
-                alert("Your request to join has been sent to the project admin!");
+                showJoinConfirm();
             }
         });
 
         // GITHUB LINK LOGIC
         const githubBtn = document.querySelector('.btn-outline');
         githubBtn.addEventListener('click', () => {
+            if (isDemoProject) {
+                showDemoMessage();
+                return;
+            }
+
             if (project.github_url) {
                 window.open(project.github_url, '_blank');
             } else {

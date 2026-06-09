@@ -17,11 +17,17 @@
             <p style="color: var(--text-muted); margin-bottom: 2rem;">Fill in the details to list your project on CodeCollab.</p>
             
             <div class="preview-container" id="image-preview">
-                <span>Image Preview Will Appear Here</span>
+                <span></span>
                 <img id="preview-img" src="" alt="Preview">
             </div>
+            <p class="error-text hidden" id="image-error">Your image must be under 10MB and in JPG/PNG format.</p>
 
             <form id="add-project-form">
+                <div class="form-group">
+                    <label for="p-creator">Your Name</label>
+                    <input type="text" id="p-creator" placeholder="e.g. John Doe" required>
+                </div>
+
                 <div class="form-group">
                     <label for="p-title">Project Title</label>
                     <input type="text" id="p-title" placeholder="e.g. HealthTracker AI" required>
@@ -39,8 +45,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="p-image">Project Cover Image (URL)</label>
-                    <input type="url" id="p-image" placeholder="https://images.unsplash.com/..." required>
+                    <label for="p-image-file">Upload Cover Image</label>
+                    <input type="file" id="p-image-file" accept="image/*">
+                    <small style="color: var(--text-muted);">Image files only. Max size 10MB.</small>
                 </div>
 
                 <div class="form-group">

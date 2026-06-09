@@ -210,6 +210,57 @@ h1 {
     background: rgba(79, 195, 179, 0.1);
 }
 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 10000;
+    padding: 1.5rem;
+}
+
+.modal-card {
+    width: min(520px, 100%);
+    background: rgba(2, 31, 44, 0.96);
+    border: 1px solid rgba(79, 195, 179, 0.2);
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(24px);
+    text-align: center;
+}
+
+.modal-card h2 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 2rem;
+}
+
+.modal-card p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-main);
+    font-size: 1.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
 .contributor-list {
     margin-top: 2rem;
 }

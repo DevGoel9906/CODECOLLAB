@@ -62,22 +62,40 @@ input:focus, textarea:focus { border-color: var(--accent); outline: none; backgr
 
 .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(79, 195, 179, 0.3); }
 
-.preview-container {
+..preview-container {
     width: 100%;
     height: 200px;
     border-radius: 15px;
     border: 2px dashed var(--glass-border);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     color: var(--text-muted);
+    text-align: center;
+    padding: 1rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.preview-container.drag-over {
+    border-color: var(--accent);
+    background: rgba(79, 195, 179, 0.08);
 }
 
 .preview-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: none;
+}
+
+.error-text {
+    color: #ff8b8b;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.error-text.hidden {
     display: none;
 }

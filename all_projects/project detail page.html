@@ -68,17 +68,28 @@
 
                 <div class="contributor-list">
                     <h4 style="margin-bottom: 1rem;">Core Maintainers</h4>
-                    <div class="contributor">
-                        <div class="avatar"><img src="https://i.pravatar.cc/150?u=1" alt=""></div>
-                        <span>Alex Rivers</span>
-                    </div>
-                    <div class="contributor">
-                        <div class="avatar"><img src="https://i.pravatar.cc/150?u=2" alt=""></div>
-                        <span>Sarah Chen</span>
+                    <div id="maintainers-container">
+                        <!-- Populated by JavaScript -->
                     </div>
                 </div>
             </div>
         </aside>
+    </div>
+
+    <div id="demo-popup" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Close demo notice">×</button>
+            <h2>This is demo project</h2>
+            <p>Actions are disabled for demo entries. Please try another project or explore the main page.</p>
+        </div>
+    </div>
+
+    <div id="join-popup" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Close">×</button>
+            <h2>✓ Request Sent!</h2>
+            <p>Your request to join has been sent to the project admin.</p>
+        </div>
     </div>
 
     <script src="../data/project_database_file.js"></script>
