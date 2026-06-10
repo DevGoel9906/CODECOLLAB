@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             btn.textContent = "Save Changes";
             btn.style.background = "#4FC3B3";
-            window.location.href = "../user_dashboard_system/dashboard page.html";
+            window.location.href = "../user_dashboard_system/index.html";
         }, 1500);
     });
 });

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="progress-container">
                         <div class="progress-bar" style="width: ${project.progress}%"></div>
                     </div>
-                    <button class="view-btn" onclick="window.location.href='all_projects/project detail page.html?id=${project.id}'">View</button>
+                    <button class="view-btn" onclick="window.location.href='all_projects/index.html?id=${project.id}'">View</button>
                 </div>
             `;
             projectGrid.appendChild(card);

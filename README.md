@@ -33,7 +33,7 @@ CodeCollab is a premium web-based platform designed to help students discover, j
 - `/admin_and_user_settings`: Management portals and settings pages.
 - `/user_dashboard_system`: Activity tracking and user stats.
 - `/data`: Centralized database (`project_database_file.js`) and backups.
-- `code collab main page.html`: The central entry point for the platform.
+- `index.html`: The central entry point for the platform.
 
 ---
 
@@ -45,7 +45,7 @@ Since this platform is designed as a direct-execution web app, you can get start
     ```bash
     git clone https://github.com/404Dev-notFound/CODECOLLAB.git
     ```
-2.  Open `code collab main page.html` in any modern web browser.
+2.  Open `index.html` in any modern web browser.
 3.  Start exploring projects!
 
 ---

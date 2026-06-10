@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.style.background = "#0C6A6E";
 
         setTimeout(() => {
-            window.location.href = "../code collab main page.html";
+            window.location.href = "../index.html";
         }, 1500);
     });
 });
