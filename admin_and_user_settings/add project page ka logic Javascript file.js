@@ -82,6 +82,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const addMaintainerBtn = document.getElementById('btn-add-maintainer');
+    const maintainersContainer = document.getElementById('maintainers-container');
+    if (addMaintainerBtn && maintainersContainer) {
+        addMaintainerBtn.addEventListener('click', () => {
+            const entry = document.createElement('div');
+            entry.className = 'maintainer-entry';
+            entry.style.background = 'rgba(255,255,255,0.02)';
+            entry.style.padding = '1rem';
+            entry.style.borderRadius = '10px';
+            entry.style.marginBottom = '1rem';
+            entry.style.border = '1px solid var(--glass-border)';
+            entry.innerHTML = `
+                <input type="text" class="m-name" placeholder="Full Name" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                <input type="url" class="m-linkedin" placeholder="LinkedIn Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                <input type="url" class="m-github" placeholder="GitHub Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                <button type="button" class="btn-remove-maintainer" style="background: #ff5f5f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">Remove Maintainer</button>
+            `;
+            maintainersContainer.appendChild(entry);
+            updateRemoveButtons();
+        });
+
+        maintainersContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-remove-maintainer')) {
+                e.target.closest('.maintainer-entry').remove();
+                updateRemoveButtons();
+            }
+        });
+
+        function updateRemoveButtons() {
+            const entries = maintainersContainer.querySelectorAll('.maintainer-entry');
+            entries.forEach((entry, index) => {
+                const btn = entry.querySelector('.btn-remove-maintainer');
+                if (entries.length > 1) {
+                    btn.style.display = 'inline-block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        }
+        updateRemoveButtons();
+    }
+
     document.getElementById('add-project-form').addEventListener('submit', (e) => {
         e.preventDefault();
         hideError();
@@ -92,6 +134,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const creatorName = document.getElementById('p-creator').value;
+        
+        const maintainerEntries = document.querySelectorAll('.maintainer-entry');
+        const maintainers = [];
+        maintainerEntries.forEach(entry => {
+            maintainers.push({
+                name: entry.querySelector('.m-name').value,
+                linkedin: entry.querySelector('.m-linkedin').value,
+                github: entry.querySelector('.m-github').value
+            });
+        });
+
         const newProject = {
             id: Date.now(),
             title: document.getElementById('p-title').value,
@@ -103,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
             progress: parseInt(document.getElementById('p-progress').value) || 0,
             contributors: 1,
             stars: "0",
-            creator: creatorName
+            creator: creatorName,
+            maintainers: maintainers
         };
 
         const storedProjects = localStorage.getItem('user_added_projects');

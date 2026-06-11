@@ -19,11 +19,11 @@
             <a href="#" class="nav-item active">
                 <span>📊</span> Dashboard
             </a>
-            <a href="../index.html" class="nav-item">
-                <span>🔍</span> Browse Projects
+            <a href="#project-status-section" class="nav-item">
+                <span>🔍</span> Project Status
             </a>
             <a href="../admin_and_user_settings/index.html" class="nav-item">
-                <span>🛠️</span> Project Management
+                <span>🛠️</span> Manage Requests
             </a>
         </nav>
         
@@ -36,18 +36,12 @@
 
     <!-- Main Section -->
     <main class="main-content">
-        <header class="header fade-in">
+        <header class="header fade-in" style="justify-content: flex-start;">
             <div>
-                <h1>Welcome back, <span id="user-name" style="color: var(--accent);">Student!</span></h1>
+                <h1>Welcome Back</h1>
                 <p id="user-bio" style="color: var(--text-muted);">Here's how your project collaborations are doing.</p>
             </div>
-            <div class="user-profile">
-                <div style="text-align: right;">
-                    <p style="font-weight: 600;">Account Menu</p>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Personal</p>
-                </div>
-                <img id="user-avatar" src="https://i.pravatar.cc/150?u=4" alt="Avatar" class="avatar">
-            </div>
+
         </header>
 
         <!-- Stats Grid -->
@@ -66,23 +60,11 @@
             </div>
         </div>
 
-        <!-- Join Requests Section -->
-        <section class="fade-in" style="animation-delay: 0.4s;">
-            <h2 class="section-title">Your Join Requests</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Project Name</th>
-                            <th>Date Applied</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="requests-table-body">
-                        <!-- Content injected by JS -->
-                    </tbody>
-                </table>
+        <!-- Project Status Section -->
+        <section class="fade-in" style="animation-delay: 0.4s;" id="project-status-section">
+            <h2 class="section-title">Project Status</h2>
+            <div id="project-status-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+                <!-- Content injected by JS -->
             </div>
         </section>
     </main>

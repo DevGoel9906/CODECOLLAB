@@ -9,6 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const localProjects = JSON.parse(localStorage.getItem('user_added_projects') || '[]');
     const projects = [...staticProjects, ...localProjects];
 
+    // Login Modal Logic
+    const loginBtn = document.getElementById('login-btn');
+    const loginModal = document.getElementById('login-modal');
+    if (loginBtn && loginModal) {
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        document.getElementById('login-ok-btn').addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+        document.getElementById('login-close-btn').addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+    }
+
     // 2. Custom Cursor Logic
     const cursor = document.querySelector('.cursor');
     document.addEventListener('mousemove', (e) => {
@@ -50,6 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'card reveal-text';
             card.style.animationDelay = `${index * 0.05}s`;
             
+            let maintainersHtml = '';
+            if (project.maintainers && project.maintainers.length > 0) {
+                maintainersHtml = `
+                    <div class="maintainers-section" style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                        <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Core Maintainers</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                            ${project.maintainers.map(m => `
+                                <li style="margin-bottom: 0.5rem;">
+                                    <span style="font-weight: 600;">&bull; ${m.name}</span><br>
+                                    <a href="${m.github}" target="_blank" style="color: var(--accent); text-decoration: none; margin-right: 0.5rem;">GitHub</a>
+                                    <a href="${m.linkedin}" target="_blank" style="color: #0A66C2; text-decoration: none;">LinkedIn</a>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
             card.innerHTML = `
                 <div class="img-container">
                     <img src="${project.image}" alt="${project.title}">
@@ -60,8 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="tags">
                         ${project.tech.map(t => `<span class="tag">${t}</span>`).join('')}
                     </div>
+                    ${maintainersHtml}
                 </div>
-                <div class="card-footer">
+                <div style="margin-top: 1rem;">
+                    <button class="schedule-btn filter-btn" data-project-id="${project.id}" style="width: 100%; margin-bottom: 1rem; border-radius: 10px;">Schedule Meeting</button>
+                </div>
+                <div class="card-footer" style="margin-top: auto;">
                     <div class="progress-container">
                         <div class="progress-bar" style="width: ${project.progress}%"></div>
                     </div>
@@ -69,6 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             projectGrid.appendChild(card);
+        });
+
+        // Attach event listeners to schedule buttons
+        document.querySelectorAll('.schedule-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const projId = e.target.getAttribute('data-project-id');
+                openMeetingModal(projId);
+            });
         });
     }
 
@@ -98,4 +143,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Meeting Modal Logic
+    const meetingModal = document.getElementById('meeting-modal');
+    const meetingSuccessModal = document.getElementById('meeting-success-modal');
+    const maintainerSelect = document.getElementById('meeting-maintainer');
+    
+    function openMeetingModal(projectId) {
+        const project = projects.find(p => p.id.toString() === projectId.toString());
+        if (!project || !project.maintainers || project.maintainers.length === 0) {
+            alert('No maintainers available for this project.');
+            return;
+        }
+        
+        maintainerSelect.innerHTML = '';
+        project.maintainers.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.name;
+            opt.textContent = m.name;
+            maintainerSelect.appendChild(opt);
+        });
+        
+        meetingModal.style.display = 'flex';
+    }
+
+    if (meetingModal) {
+        document.getElementById('meeting-close-icon').addEventListener('click', (e) => {
+            e.preventDefault();
+            meetingModal.style.display = 'none';
+        });
+
+        document.getElementById('meeting-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            meetingModal.style.display = 'none';
+            meetingSuccessModal.style.display = 'flex';
+            e.target.reset();
+        });
+
+        document.getElementById('meeting-success-ok-btn').addEventListener('click', () => {
+            meetingSuccessModal.style.display = 'none';
+        });
+    }
 });

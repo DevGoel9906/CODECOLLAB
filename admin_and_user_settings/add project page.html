@@ -70,6 +70,19 @@
                     <input type="number" id="p-progress" min="0" max="100" value="0">
                 </div>
 
+                <div class="form-group" id="maintainers-group">
+                    <label>Core Maintainers</label>
+                    <div id="maintainers-container">
+                        <div class="maintainer-entry" style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 10px; margin-bottom: 1rem; border: 1px solid var(--glass-border);">
+                            <input type="text" class="m-name" placeholder="Full Name" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                            <input type="url" class="m-linkedin" placeholder="LinkedIn Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                            <input type="url" class="m-github" placeholder="GitHub Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                            <button type="button" class="btn-remove-maintainer" style="background: #ff5f5f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; display: none;">Remove Maintainer</button>
+                        </div>
+                    </div>
+                    <button type="button" id="btn-add-maintainer" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--glass-border); padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">+ Add Maintainer</button>
+                </div>
+
                 <button type="submit" class="btn-submit">Add Project to Platform</button>
             </form>
         </div>

@@ -33,7 +33,7 @@
         <div class="nav-links">
             <a href="user_dashboard_system/index.html">Dashboard</a>
             <a href="#">Join us</a>
-            <a href="#" style="color: var(--accent);">Login</a>
+            <a href="javascript:void(0)" id="login-btn" style="color: var(--accent);">Login</a>
         </div>
     </nav>
 
@@ -79,6 +79,60 @@
     <footer style="text-align: center; padding: 4rem; color: var(--text-muted); opacity: 0.6; font-size: 0.9rem;">
         <p>&copy; 2026 CodeCollab. Built with &hearts; for students.</p>
     </footer>
+
+    <!-- Login Coming Soon Modal -->
+    <div id="login-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); text-align: center; max-width: 400px; width: 90%;">
+            <h2 style="margin-bottom: 1rem;">Authentication Coming Soon</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">User authentication is currently under development and will be available in an upcoming release.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button id="login-ok-btn" class="filter-btn active" style="padding: 0.5rem 1.5rem;">OK</button>
+                <button id="login-close-btn" class="filter-btn" style="padding: 0.5rem 1.5rem;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Meeting Modal -->
+    <div id="meeting-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); width: 90%; max-width: 500px; position: relative;">
+            <button id="meeting-close-icon" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="margin-bottom: 1rem;">Schedule Meeting</h2>
+            <form id="meeting-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="meeting-maintainer" style="text-align: left;">Select Maintainer</label>
+                    <select id="meeting-maintainer" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                        <!-- Options injected via JS -->
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="meeting-topic" style="text-align: left;">Topic</label>
+                    <input type="text" id="meeting-topic" placeholder="e.g. Frontend Contribution Discussion" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="meeting-desc" style="text-align: left;">Description</label>
+                    <textarea id="meeting-desc" rows="3" placeholder="I would like to discuss..." required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white; resize: vertical;"></textarea>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="meeting-name" style="text-align: left;">Your Name</label>
+                    <input type="text" id="meeting-name" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="meeting-email" style="text-align: left;">Your Email</label>
+                    <input type="email" id="meeting-email" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                </div>
+                <button type="submit" class="filter-btn active" style="margin-top: 1rem; width: 100%; padding: 1rem;">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Meeting Success Modal -->
+    <div id="meeting-success-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); text-align: center; max-width: 400px; width: 90%;">
+            <h2 style="margin-bottom: 1rem;">Request Submitted</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">Your meeting request has been successfully sent. The selected maintainer will review your request and contact you via email with further details as soon as possible.</p>
+            <button id="meeting-success-ok-btn" class="filter-btn active" style="padding: 0.5rem 1.5rem;">OK</button>
+        </div>
+    </div>
 
     <!-- Database and Logic -->
     <script src="data/project_database_file.js"></script>

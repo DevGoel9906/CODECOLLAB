@@ -18,7 +18,10 @@ const globalDatabase = {
             stars: "890",
             github_url: "https://github.com/codecollab/securepass",
             description: "A decentralized password manager using blockchain for immutable security.",
-            image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=800"
+            image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&q=80&w=800",
+            maintainers: [
+                { name: "Dev Goel", github: "https://github.com/devgoel", linkedin: "https://linkedin.com/in/devgoel" }
+            ]
         },
         {
             id: 2,
@@ -30,7 +33,11 @@ const globalDatabase = {
             stars: "1.2k",
             github_url: "https://github.com/codecollab/harmony",
             description: "Community-driven component library focused on accessibility and smooth animations.",
-            image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800"
+            image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
+            maintainers: [
+                { name: "John Smith", github: "https://github.com/johnsmith", linkedin: "https://linkedin.com/in/johnsmith" },
+                { name: "Alice Doe", github: "https://github.com/alicedoe", linkedin: "https://linkedin.com/in/alicedoe" }
+            ]
         },
         {
             id: 3,
@@ -42,7 +49,10 @@ const globalDatabase = {
             stars: "310",
             github_url: "https://github.com/codecollab/nebulaos",
             description: "Lightweight, web-based operating system concept written in modern JS.",
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+            maintainers: [
+                { name: "Sarah Lee", github: "https://github.com/sarahlee", linkedin: "https://linkedin.com/in/sarahlee" }
+            ]
         }
     ],
 
