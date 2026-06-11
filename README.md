@@ -37,19 +37,6 @@ CodeCollab is a premium web-based platform designed to help students discover, j
 
 ---
 
-## 🚀 Getting Started
-
-Since this platform is designed as a direct-execution web app, you can get started immediately without complex set-up:
-
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/404Dev-notFound/CODECOLLAB.git
-    ```
-2.  Open `index.html` in any modern web browser.
-3.  Start exploring projects!
-
----
-
 ## 🎨 UI Aesthetics
 
 - **Primary Colors:** Deep Teal (#021F2C) & Dark Blue.
