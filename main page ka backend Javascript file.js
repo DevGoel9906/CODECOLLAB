@@ -3,11 +3,35 @@
    Description: Interaction, Animations, and Centralized Data Management
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // 1. Data Source (Merge Static and User-Added Projects)
     const staticProjects = (typeof globalDatabase !== 'undefined') ? globalDatabase.projects : [];
     const localProjects = JSON.parse(localStorage.getItem('user_added_projects') || '[]');
-    const projects = [...staticProjects, ...localProjects];
+    let projects = [...staticProjects, ...localProjects];
+
+    // Fetch projects from backend
+    try {
+        const response = await fetch('http://localhost:5000/api/v1/projects');
+        const result = await response.json();
+        if (result.success && result.data) {
+            const backendProjects = result.data.map(p => ({
+                id: p.projectId,
+                title: p.title,
+                category: p.techStack && p.techStack.length > 0 ? p.techStack[0] : 'Web',
+                tech: p.techStack || [],
+                progress: 0,
+                contributors: 1,
+                stars: "0",
+                github_url: p.githubLink || '#',
+                description: p.description,
+                image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
+                maintainers: [] // Would normally be fetched
+            }));
+            projects = [...projects, ...backendProjects];
+        }
+    } catch (err) {
+        console.error('Failed to fetch projects from backend:', err);
+    }
 
     // Login Modal Logic
     const loginBtn = document.getElementById('login-btn');
@@ -173,8 +197,34 @@ document.addEventListener('DOMContentLoaded', () => {
             meetingModal.style.display = 'none';
         });
 
-        document.getElementById('meeting-form').addEventListener('submit', (e) => {
+        document.getElementById('meeting-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            const requesterId = localStorage.getItem('userId') || 'USR-000000'; // fallback mock
+            const recipientName = document.getElementById('meeting-maintainer').value;
+            // Hacky mock mapping since we don't have real users for maintainers yet
+            const recipientId = 'USR-999999'; 
+            
+            // Extract project id from somewhere... actually we can store it globally when opening modal
+            const projectId = window.currentMeetingProjectId || 'PRJ-000000';
+            const message = document.getElementById('meeting-desc').value;
+
+            try {
+                await fetch('http://localhost:5000/api/v1/meeting-requests', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        requesterId,
+                        recipientId,
+                        projectId,
+                        message,
+                        scheduledDate: new Date().toISOString()
+                    })
+                });
+            } catch(err) {
+                console.error(err);
+            }
+
             meetingModal.style.display = 'none';
             meetingSuccessModal.style.display = 'flex';
             e.target.reset();

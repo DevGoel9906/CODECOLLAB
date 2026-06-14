@@ -10,9 +10,9 @@ router.get('/', meetingRequestController.getRequests);
 router.post(
   '/',
   [
-    body('requester').isMongoId().withMessage('Valid requester ID is required'),
-    body('recipient').isMongoId().withMessage('Valid recipient ID is required'),
-    body('project').isMongoId().withMessage('Valid project ID is required'),
+    body('requesterId').isString().notEmpty().withMessage('Valid requester ID is required'),
+    body('recipientId').isString().notEmpty().withMessage('Valid recipient ID is required'),
+    body('projectId').isString().notEmpty().withMessage('Valid project ID is required'),
     body('message').optional().trim().escape(),
     body('scheduledDate').optional().isISO8601().toDate(),
   ],

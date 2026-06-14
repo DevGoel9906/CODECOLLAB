@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateRemoveButtons();
     }
 
-    document.getElementById('add-project-form').addEventListener('submit', (e) => {
+    document.getElementById('add-project-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         hideError();
 
@@ -145,14 +145,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        const ownerId = localStorage.getItem('userId') || 'USR-000000'; // fallback mock
+
+        const payload = {
+            title: document.getElementById('p-title').value,
+            description: document.getElementById('p-desc').value,
+            githubLink: document.getElementById('p-github').value,
+            techStack: document.getElementById('p-tech').value.split(',').map(t => t.trim()),
+            ownerId: ownerId,
+        };
+
+        try {
+            await fetch('http://localhost:5000/api/v1/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+        } catch (err) {
+            console.error('Failed to post project to backend', err);
+        }
+
+        // Also add it locally for quick rendering without backend issues
         const newProject = {
             id: Date.now(),
-            title: document.getElementById('p-title').value,
+            ...payload,
             category: document.getElementById('p-category').value,
-            tech: document.getElementById('p-tech').value.split(',').map(t => t.trim()),
+            tech: payload.techStack,
             image: currentImageData,
-            github_url: document.getElementById('p-github').value,
-            description: document.getElementById('p-desc').value,
+            github_url: payload.githubLink,
             progress: parseInt(document.getElementById('p-progress').value) || 0,
             contributors: 1,
             stars: "0",

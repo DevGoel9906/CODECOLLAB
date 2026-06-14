@@ -194,3 +194,46 @@ td {
     .logo, .nav-item span { display: none; }
     .main-content { margin-left: 80px; }
 }
+
+/* ── Owner Project Status Controls ──────────────── */
+#my-projects-section .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#my-projects-grid .glass-card:hover {
+    border-color: rgba(79, 195, 179, 0.35);
+}
+
+/* Status dropdown styled to match dark theme */
+#my-projects-grid select option {
+    background: #021F2C;
+    color: #AEEFE0;
+}
+
+#my-projects-grid select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Save button pulse on hover */
+#my-projects-grid button:active {
+    transform: scale(0.96) !important;
+}
+
+/* Status badge inside project cards */
+.status-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
