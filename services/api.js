@@ -1,43 +1,39 @@
-const API_BASE_URL = 'http://localhost:5000/api/v1';
-
 /**
- * Generic API request handler
- * @param {string} endpoint - The API endpoint (e.g., '/users')
- * @param {object} options - Fetch options
- * @returns {Promise<any>} - The response data
+ * services/api.js
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CODECOLLAB — Legacy API Wrapper (DEPRECATED)
+ *
+ * NOTE: This file is kept strictly for backward compatibility with older
+ * code that imports `apiService` from `api.js`.
+ * 
+ * It delegates completely to the new centralized `apiClient`.
+ * New code should use `window.apiClient` directly.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
-const apiRequest = async (endpoint, options = {}) => {
-  const url = `${API_BASE_URL}${endpoint}`;
-  
-  // Retrieve token from local storage if needed
-  const token = localStorage.getItem('token');
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...options.headers,
+
+(function (global) {
+  'use strict';
+
+  // Ensure new apiClient exists
+  if (!global.apiClient) {
+    console.warn('[Legacy API] WARNING: apiClient not found. Please load config.js, securityModal.js, and apiClient.js first.');
+    
+    // Provide a non-crashing mock if it's missing (shouldn't happen with proper script ordering)
+    global.apiService = {
+      get: async () => { throw new Error('API Client not loaded'); },
+      post: async () => { throw new Error('API Client not loaded'); },
+      put: async () => { throw new Error('API Client not loaded'); },
+      delete: async () => { throw new Error('API Client not loaded'); },
+    };
+    return;
+  }
+
+  // Alias the new client to the old variable name for compatibility
+  global.apiService = {
+    get: (endpoint) => global.apiClient.get(endpoint),
+    post: (endpoint, body) => global.apiClient.post(endpoint, body),
+    put: (endpoint, body) => global.apiClient.put(endpoint, body),
+    delete: (endpoint) => global.apiClient.delete(endpoint),
   };
 
-  try {
-    const response = await fetch(url, { ...options, headers });
-    const data = await response.json();
-
-    if (!response.ok) {
-      // Handle HTTP errors
-      const errorMessage = data.message || data.errors?.[0]?.msg || 'API Error occurred';
-      throw new Error(errorMessage);
-    }
-
-    return data;
-  } catch (error) {
-    console.error(`API Request Error [${options.method || 'GET'} ${endpoint}]:`, error);
-    throw error;
-  }
-};
-
-export const apiService = {
-  get: (endpoint) => apiRequest(endpoint, { method: 'GET' }),
-  post: (endpoint, body) => apiRequest(endpoint, { method: 'POST', body: JSON.stringify(body) }),
-  put: (endpoint, body) => apiRequest(endpoint, { method: 'PUT', body: JSON.stringify(body) }),
-  delete: (endpoint) => apiRequest(endpoint, { method: 'DELETE' }),
-};
+})(window);

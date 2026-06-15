@@ -4,8 +4,6 @@
                 Status dropdown is ONLY visible to the project owner.
 */
 
-const API_BASE = 'http://localhost:5000/api/v1';
-
 // Initial Mock Data for Join Requests (fallback if no stored data)
 let joinRequests = [
     { id: 101, project: "SwiftTrack Logistics", date: "2026-04-05", status: "Ongoing" },
@@ -77,8 +75,7 @@ async function loadMyProjects() {
     if (!currentUserId) return;
 
     try {
-        const res = await fetch(`${API_BASE}/projects`);
-        const result = await res.json();
+        const result = await window.apiClient.get('/projects');
         if (result.success && Array.isArray(result.data)) {
             // Filter to only projects this user owns
             myProjects = result.data.filter(p => p.ownerId === currentUserId);
@@ -322,19 +319,15 @@ async function applyStatusUpdate(projectId, isLocal) {
     // 1. Try PATCH backend call (skip for local-only projects without a real projectId)
     if (!isLocal) {
         try {
-            const res = await fetch(`${API_BASE}/projects/${projectId}/status`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ownerId, status: newStatus })
-            });
-            const result = await res.json();
+            const result = await window.apiClient.patch(`/projects/${projectId}/status`, { ownerId, status: newStatus });
 
-            if (!res.ok || !result.success) {
+            if (!result.success) {
                 msgEl.style.color = '#dc3545';
                 msgEl.textContent = result.message || 'Update failed.';
                 return;
             }
         } catch (err) {
+            // apiClient already intercepts securityThreat errors
             msgEl.style.color = '#dc3545';
             msgEl.textContent = 'Network error. Status saved locally.';
         }

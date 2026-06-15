@@ -145,7 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        const ownerId = localStorage.getItem('userId') || 'USR-000000'; // fallback mock
+        const ownerId = localStorage.getItem('userId');
+        
+        if (!ownerId) {
+            // Block unauthenticated requests locally before even hitting the API
+            if (window.CodeCollabSecurity) {
+                window.CodeCollabSecurity.showWarning("You must be logged in to launch a project. Please return home and log in first.");
+            } else {
+                showError("You must be logged in to launch a project.");
+            }
+            return;
+        }
 
         const payload = {
             title: document.getElementById('p-title').value,
@@ -156,13 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            await fetch('http://localhost:5000/api/v1/projects', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+            await window.apiClient.post('/projects', payload);
         } catch (err) {
             console.error('Failed to post project to backend', err);
+            // If it's a security threat, apiClient already showed the modal.
+            if (err.isSecurityThreat) return;
         }
 
         // Also add it locally for quick rendering without backend issues

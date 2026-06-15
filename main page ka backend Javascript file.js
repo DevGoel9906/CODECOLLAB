@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Fetch projects from backend
     try {
-        const response = await fetch('http://localhost:5000/api/v1/projects');
-        const result = await response.json();
+        const result = await window.apiClient.get('/projects');
         if (result.success && result.data) {
             const backendProjects = result.data.map(p => ({
                 id: p.projectId,
@@ -210,16 +209,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const message = document.getElementById('meeting-desc').value;
 
             try {
-                await fetch('http://localhost:5000/api/v1/meeting-requests', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        requesterId,
-                        recipientId,
-                        projectId,
-                        message,
-                        scheduledDate: new Date().toISOString()
-                    })
+                await window.apiClient.post('/meeting-requests', {
+                    requesterId,
+                    recipientId,
+                    projectId,
+                    message,
+                    scheduledDate: new Date().toISOString()
                 });
             } catch(err) {
                 console.error(err);
