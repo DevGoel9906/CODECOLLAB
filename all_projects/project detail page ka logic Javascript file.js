@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // GITHUB LINK LOGIC
-        const githubBtn = document.querySelector('.btn-outline');
+        const githubBtn = document.getElementById('github-btn') || document.querySelector('.btn-outline');
         githubBtn.addEventListener('click', () => {
             if (isDemoProject) {
                 showDemoMessage();
@@ -128,6 +128,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("GitHub repository not linked for this project.");
             }
         });
+
+        // MEETING MODAL LOGIC
+        const scheduleBtn = document.getElementById('schedule-meeting-btn');
+        const meetingModal = document.getElementById('meeting-modal');
+        const meetingSuccessModal = document.getElementById('meeting-success-modal');
+        const maintainerSelect = document.getElementById('meeting-maintainer');
+        
+        if (scheduleBtn && meetingModal) {
+            scheduleBtn.addEventListener('click', () => {
+                if (isDemoProject) {
+                    showDemoMessage();
+                    return;
+                }
+
+                // In this simplified version, the creator is the only maintainer shown for now
+                // Ideally this uses project.maintainers if available
+                maintainerSelect.innerHTML = '';
+                const opt = document.createElement('option');
+                opt.value = project.creator || 'Admin';
+                opt.textContent = project.creator || 'Admin';
+                maintainerSelect.appendChild(opt);
+                
+                meetingModal.style.display = 'flex';
+            });
+
+            document.getElementById('meeting-close-icon').addEventListener('click', (e) => {
+                e.preventDefault();
+                meetingModal.style.display = 'none';
+            });
+
+            document.getElementById('meeting-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const requesterId = localStorage.getItem('userId') || 'USR-000000';
+                const recipientName = document.getElementById('meeting-maintainer').value;
+                const recipientId = 'USR-999999'; // Mock ID
+                
+                const message = document.getElementById('meeting-desc').value;
+
+                try {
+                    await window.apiClient.post('/meeting-requests', {
+                        requesterId,
+                        recipientId,
+                        projectId: project.id || project.projectId || 'PRJ-000000',
+                        message,
+                        scheduledDate: new Date().toISOString()
+                    });
+                } catch(err) {
+                    console.error(err);
+                    if (err.isSecurityThreat) return;
+                }
+
+                meetingModal.style.display = 'none';
+                meetingSuccessModal.style.display = 'flex';
+                e.target.reset();
+            });
+
+            document.getElementById('meeting-success-ok-btn').addEventListener('click', () => {
+                meetingSuccessModal.style.display = 'none';
+            });
+        }
     }
 
     // 2. Custom Cursor

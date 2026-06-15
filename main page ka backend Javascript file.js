@@ -112,31 +112,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 <div>
                     <h3>${project.title}</h3>
-                    <p>${project.description}</p>
                     <div class="tags">
                         ${project.tech.map(t => `<span class="tag">${t}</span>`).join('')}
                     </div>
-                    ${maintainersHtml}
                 </div>
-                <div style="margin-top: 1rem;">
-                    <button class="schedule-btn filter-btn" data-project-id="${project.id}" style="width: 100%; margin-bottom: 1rem; border-radius: 10px;">Schedule Meeting</button>
+                <div style="margin-bottom: 1rem;">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Status:</span>
+                    <span style="color: var(--accent); font-weight: 600; font-size: 0.85rem; margin-left: 0.5rem; text-transform: uppercase;">${project.status || 'Active'}</span>
                 </div>
-                <div class="card-footer" style="margin-top: auto;">
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: ${project.progress}%"></div>
-                    </div>
-                    <button class="view-btn" onclick="window.location.href='all_projects/index.html?id=${project.id}'">View</button>
+
+                ${maintainersHtml}
+
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <a href="all_projects/index.html?id=${project.id}" class="filter-btn active" style="text-decoration: none; text-align: center; width: 100%;">View Project</a>
                 </div>
             `;
             projectGrid.appendChild(card);
-        });
-
-        // Attach event listeners to schedule buttons
-        document.querySelectorAll('.schedule-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const projId = e.target.getAttribute('data-project-id');
-                openMeetingModal(projId);
-            });
         });
     }
 
@@ -166,67 +157,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Meeting Modal Logic
-    const meetingModal = document.getElementById('meeting-modal');
-    const meetingSuccessModal = document.getElementById('meeting-success-modal');
-    const maintainerSelect = document.getElementById('meeting-maintainer');
-    
-    function openMeetingModal(projectId) {
-        const project = projects.find(p => p.id.toString() === projectId.toString());
-        if (!project || !project.maintainers || project.maintainers.length === 0) {
-            alert('No maintainers available for this project.');
-            return;
-        }
-        
-        maintainerSelect.innerHTML = '';
-        project.maintainers.forEach(m => {
-            const opt = document.createElement('option');
-            opt.value = m.name;
-            opt.textContent = m.name;
-            maintainerSelect.appendChild(opt);
-        });
-        
-        meetingModal.style.display = 'flex';
-    }
-
-    if (meetingModal) {
-        document.getElementById('meeting-close-icon').addEventListener('click', (e) => {
-            e.preventDefault();
-            meetingModal.style.display = 'none';
-        });
-
-        document.getElementById('meeting-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const requesterId = localStorage.getItem('userId') || 'USR-000000'; // fallback mock
-            const recipientName = document.getElementById('meeting-maintainer').value;
-            // Hacky mock mapping since we don't have real users for maintainers yet
-            const recipientId = 'USR-999999'; 
-            
-            // Extract project id from somewhere... actually we can store it globally when opening modal
-            const projectId = window.currentMeetingProjectId || 'PRJ-000000';
-            const message = document.getElementById('meeting-desc').value;
-
-            try {
-                await window.apiClient.post('/meeting-requests', {
-                    requesterId,
-                    recipientId,
-                    projectId,
-                    message,
-                    scheduledDate: new Date().toISOString()
-                });
-            } catch(err) {
-                console.error(err);
-            }
-
-            meetingModal.style.display = 'none';
-            meetingSuccessModal.style.display = 'flex';
-            e.target.reset();
-        });
-
-        document.getElementById('meeting-success-ok-btn').addEventListener('click', () => {
-            meetingSuccessModal.style.display = 'none';
-        });
-    }
 });
