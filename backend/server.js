@@ -101,7 +101,7 @@ app.use(helmet({
 }));
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight OPTIONS requests
+app.options(cors(corsOptions)); // Handle preflight OPTIONS requests
 
 // HTTP request logger — use 'combined' in production for more detail
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
