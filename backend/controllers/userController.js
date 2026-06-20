@@ -1,12 +1,11 @@
 /**
  * controllers/userController.js
  *
- * Handles user registration and listing.
+ * Handles user listing and profile retrieval.
  * Passwords are hashed in the service layer — never stored plain,
  * never returned in any response.
  *
- * Duplicate key errors (email, userId) are caught here and
- * mapped to user-friendly messages without leaking DB internals.
+ * Note: Registration is now handled by authController.js
  */
 
 const { validationResult } = require('express-validator');
@@ -17,14 +16,39 @@ const activityLog  = require('../services/activityLogService');
 
 exports.getUsers = async (req, res, next) => {
   try {
-    const users = await userService.getAllUsers(); // passwords excluded in service
+    const users = await userService.getAllUsers();
     res.status(200).json({ success: true, message: 'Users retrieved.', data: users });
   } catch (err) {
     next(err);
   }
 };
 
+// ── GET /api/v1/users/:userId ─────────────────────────────────────────────────
+
+exports.getUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  // Validate format
+  if (!/^USR-\d{6}$/.test(userId)) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid user ID format.',
+    });
+  }
+
+  try {
+    const user = await userService.getUserById(userId);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found.' });
+    }
+    res.status(200).json({ success: true, message: 'User retrieved.', data: user });
+  } catch (err) {
+    next(err);
+  }
+};
+
 // ── POST /api/v1/users ────────────────────────────────────────────────────────
+// Legacy registration endpoint — prefer POST /api/v1/auth/register
 
 exports.createUser = async (req, res, next) => {
   const errors = validationResult(req);
@@ -38,7 +62,7 @@ exports.createUser = async (req, res, next) => {
     );
     return res.status(400).json({
       success: false,
-      message: 'Validation failed. Please check your input.',
+      message: errors.array()[0].msg || 'Validation failed. Please check your input.',
       errors: errors.array().map((e) => ({ field: e.path, message: e.msg })),
     });
   }
@@ -57,10 +81,9 @@ exports.createUser = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message: 'Account created successfully.',
-      data: { user }, // password is already stripped in service
+      data: { user },
     });
   } catch (err) {
-    // Duplicate email
     if (err.code === 'DUPLICATE_EMAIL') {
       activityLog.log(
         'anonymous',
@@ -71,11 +94,10 @@ exports.createUser = async (req, res, next) => {
       );
       return res.status(409).json({
         success: false,
-        message: 'An account with this email already exists.',
+        message: 'An account with this email already exists. Try signing in instead.',
       });
     }
 
-    // MongoDB duplicate key (catch-all for unique index violations)
     if (err.code === 11000) {
       return res.status(409).json({
         success: false,
