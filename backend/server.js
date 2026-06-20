@@ -101,7 +101,7 @@ app.use(helmet({
 }));
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight OPTIONS requests
+// app.options('*', cors(corsOptions)); // Handle preflight OPTIONS requests
 
 // HTTP request logger — use 'combined' in production for more detail
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
@@ -128,10 +128,12 @@ app.get('/health', (req, res) => {
 });
 
 // ── API Routes ────────────────────────────────────────────────────────────────
+app.use('/api/v1/auth',             require('./routes/v1/auth'));
 app.use('/api/v1/users',           require('./routes/v1/users'));
 app.use('/api/v1/projects',        require('./routes/v1/projects'));
 app.use('/api/v1/maintainers',     require('./routes/v1/maintainers'));
 app.use('/api/v1/meeting-requests', require('./routes/v1/meetingRequests'));
+
 
 // ── 404 Handler ───────────────────────────────────────────────────────────────
 app.use((req, res) => {

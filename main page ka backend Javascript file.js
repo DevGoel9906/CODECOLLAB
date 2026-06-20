@@ -32,34 +32,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Failed to fetch projects from backend:', err);
     }
 
-    // Login Modal Logic
+    // Auth Session Nav Logic
     const loginBtn = document.getElementById('login-btn');
-    const loginModal = document.getElementById('login-modal');
-    if (loginBtn && loginModal) {
-        loginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-        });
-        document.getElementById('login-ok-btn').addEventListener('click', () => {
-            loginModal.style.display = 'none';
-        });
-        document.getElementById('login-close-btn').addEventListener('click', () => {
-            loginModal.style.display = 'none';
-        });
+    const currentUserId = localStorage.getItem('userId');
+    if (loginBtn) {
+        if (currentUserId) {
+            loginBtn.textContent = 'Logout';
+            loginBtn.href = 'javascript:void(0)';
+            loginBtn.style.color = '#ff5f5f';
+            loginBtn.addEventListener('click', () => {
+                localStorage.clear();
+                window.location.reload();
+            });
+        } else {
+            loginBtn.textContent = 'Login';
+            loginBtn.href = 'auth.html';
+        }
     }
 
     // 2. Custom Cursor Logic
     const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
-    });
-
-    const hoverables = ['a', 'button', '.card', '.filter-btn', 'input'];
-    hoverables.forEach(tag => {
-        document.querySelectorAll(tag).forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.style.transform += ' scale(2.5)');
-            el.addEventListener('mouseleave', () => cursor.style.transform = cursor.style.transform.replace(' scale(2.5)', ''));
+    if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
         });
-    });
+
+        const hoverables = ['a', 'button', '.card', '.filter-btn', 'input'];
+        hoverables.forEach(tag => {
+            document.querySelectorAll(tag).forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.style.transform += ' scale(2.5)');
+                el.addEventListener('mouseleave', () => cursor.style.transform = cursor.style.transform.replace(' scale(2.5)', ''));
+            });
+        });
+    }
 
     // 3. Render Projects Logic
     const projectGrid = document.getElementById('project-grid');
@@ -67,14 +72,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     let activeCategory = 'All';
 
     function renderProjects() {
+        if (!projectGrid) return;
         projectGrid.innerHTML = '';
         const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
 
         const filtered = projects.filter(p => {
             const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
             const matchesSearch = p.title.toLowerCase().includes(searchTerm) || 
-                                p.tech.some(t => t.toLowerCase().includes(searchTerm)) ||
-                                p.description.toLowerCase().includes(searchTerm);
+                                (p.tech && p.tech.some(t => t.toLowerCase().includes(searchTerm))) ||
+                                (p.description && p.description.toLowerCase().includes(searchTerm));
             return matchesCategory && matchesSearch;
         });
 
@@ -113,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div>
                     <h3>${project.title}</h3>
                     <div class="tags">
-                        ${project.tech.map(t => `<span class="tag">${t}</span>`).join('')}
+                        ${project.tech ? project.tech.map(t => `<span class="tag">${t}</span>`).join('') : ''}
                     </div>
                 </div>
                 <div style="margin-bottom: 1rem;">

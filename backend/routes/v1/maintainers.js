@@ -15,13 +15,13 @@ const sanitizer            = require('../../middleware/sanitizer');
 // ── Validation Rules ──────────────────────────────────────────────────────────
 
 const createMaintainerValidation = [
-  body('user')
+  body('userId')
     .notEmpty().withMessage('User ID is required.')
-    .isMongoId().withMessage('User must be a valid ID.'),
+    .matches(/^USR-\d{6}$/).withMessage('userId must be a valid user ID (USR-XXXXXX).'),
 
-  body('project')
+  body('projectId')
     .notEmpty().withMessage('Project ID is required.')
-    .isMongoId().withMessage('Project must be a valid ID.'),
+    .matches(/^PRJ-\d{6}$/).withMessage('projectId must be a valid project ID (PRJ-XXXXXX).'),
 ];
 
 // ── Routes ────────────────────────────────────────────────────────────────────

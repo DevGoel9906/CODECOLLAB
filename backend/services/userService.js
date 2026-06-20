@@ -29,14 +29,14 @@ class UserService {
    * Return all users. Password field is never included.
    */
   async getAllUsers() {
-    return await User.find().select('-_id -__v -password').lean();
+    return await User.find().select('-_id -__v -passwordHash').lean();
   }
 
   /**
    * Return a single user by custom userId. Password excluded.
    */
   async getUserById(userId) {
-    return await User.findOne({ userId }).select('-_id -__v -password').lean();
+    return await User.findOne({ userId }).select('-_id -__v -passwordHash').lean();
   }
 
   /**
@@ -57,7 +57,7 @@ class UserService {
     // 1. Duplicate email check
     const existingUser = await User.findOne({ email }).select('_id').lean();
     if (existingUser) {
-      throw createError('DUPLICATE_EMAIL', 'This email address is already registered.', 409);
+      throw createError('DUPLICATE_EMAIL', 'An account with this email already exists. Try signing in instead.', 409);
     }
 
     // 2. Hash password — never store plain text
@@ -70,7 +70,7 @@ class UserService {
     const user = new User({
       ...userData,
       userId,
-      password: hashedPassword,
+      passwordHash: hashedPassword,
     });
     await user.save();
 
@@ -78,9 +78,32 @@ class UserService {
     const userObj = user.toObject();
     delete userObj._id;
     delete userObj.__v;
-    delete userObj.password; // Hard delete — never trust .select() alone
+    delete userObj.passwordHash; // Hard delete — never trust .select() alone
+    return userObj;
+  }
+
+  /**
+   * Authenticate a user by email and password.
+   * Returns user details if valid.
+   */
+  async authenticateUser(email, password) {
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw createError('INVALID_CREDENTIALS', 'Unable to sign in. Please check your email and password and try again.', 401);
+    }
+
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    if (!isMatch) {
+      throw createError('INVALID_CREDENTIALS', 'Unable to sign in. Please check your email and password and try again.', 401);
+    }
+
+    const userObj = user.toObject();
+    delete userObj._id;
+    delete userObj.__v;
+    delete userObj.passwordHash;
     return userObj;
   }
 }
 
 module.exports = new UserService();
+

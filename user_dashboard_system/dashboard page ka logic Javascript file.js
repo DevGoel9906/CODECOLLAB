@@ -44,6 +44,11 @@ function getBadge(status) {
     ">${cfg.label}</span>`;
 }
 
+// ── Check authentication status before rendering
+if (!currentUserId) {
+    window.location.href = '../auth.html';
+}
+
 // ──────────────────────────────────────────────
 // ON DOM READY
 // ──────────────────────────────────────────────
