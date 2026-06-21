@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -8,6 +9,4 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => {
     console.error(err);
     process.exit(1);
-  });
-
-require('dotenv').config();
+  });

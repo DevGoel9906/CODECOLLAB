@@ -6,6 +6,11 @@
     <title>Add New Project | CodeCollab</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="add project page ka design CSS file.css">
+    <script>
+        if (!localStorage.getItem('userId')) {
+            window.location.href = '../auth.html';
+        }
+    </script>
 </head>
 <body>
 

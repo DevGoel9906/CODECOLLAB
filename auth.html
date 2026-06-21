@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect to CodeCollab</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+    <!-- Backdrop blobs for dynamic background depth -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <!-- Branding Header -->
+            <div class="auth-header">
+                <div class="brand">CodeCollab</div>
+                <p id="auth-title-desc">Join the student open-source workspace</p>
+            </div>
+
+            <!-- Global Alert Container -->
+            <div id="auth-alert" class="alert"></div>
+
+            <!-- ── SIGN IN FORM ────────────────────────────────────────────── -->
+            <form id="signin-form">
+                <div class="form-group">
+                    <label for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" placeholder="name@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-actions">
+                    <a href="javascript:void(0)" class="forgot-link" onclick="alert('Password reset system is currently under maintenance. Please contact support.')">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">Sign In</button>
+
+                <div class="toggle-mode">
+                    Don't have an account? <a href="javascript:void(0)" id="show-signup">Create account</a>
+                </div>
+            </form>
+
+            <!-- ── SIGN UP FORM ────────────────────────────────────────────── -->
+            <form id="signup-form" class="hidden">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Alex Carter" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="signup-username">Username <span style="font-weight: 300; font-size: 0.75rem;">(Optional)</span></label>
+                        <input type="text" id="signup-username" placeholder="alexcarter">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-role">Workspace Role</label>
+                        <select id="signup-role" required>
+                            <option value="" disabled selected>Select Role</option>
+                            <option value="Student">Student</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Maintainer">Maintainer</option>
+                            <option value="Contributor">Contributor</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="alex@university.edu" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="signup-github">GitHub Profile URL</label>
+                        <input type="url" id="signup-github" placeholder="https://github.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-linkedin">LinkedIn Profile URL</label>
+                        <input type="url" id="signup-linkedin" placeholder="https://linkedin.com/in/...">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" style="margin-top: 1rem;">Register Workspace</button>
+
+                <div class="toggle-mode">
+                    Already have an account? <a href="javascript:void(0)" id="show-signin">Sign In instead</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Scripts configuration -->
+    <script src="services/config.js"></script>
+    <script src="services/securityModal.js"></script>
+    <script src="services/apiClient.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

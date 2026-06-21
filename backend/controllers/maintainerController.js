@@ -46,7 +46,7 @@ exports.createMaintainer = async (req, res, next) => {
       activityLog.ACTIONS.MAINTAINER_ADDED,
       req.ip,
       'success',
-      `user: ${req.body.user} | project: ${req.body.project}`
+      `userId: ${req.body.userId} | projectId: ${req.body.projectId}`
     );
 
     res.status(201).json({
