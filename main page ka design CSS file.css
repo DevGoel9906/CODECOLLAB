@@ -207,6 +207,7 @@
     gap: 2rem;
     perspective: 1000px;
     margin-bottom: 2rem;
+    padding: 0 1rem; /* added side padding for spacing */
 }
 
 /* Ensure hero sticker visibility */
@@ -231,6 +232,7 @@
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
+    transform-origin: center center; /* ensure scaling from center without movement */
 }
 
 /* Spotlight mouse movement reflection circle */
@@ -264,7 +266,7 @@
 }
 
 .card:hover .img-container img {
-    transform: scale(1.04);
+    transform: scale(1.06); /* slightly larger on hover */
 }
 
 /* Footer spacing */
