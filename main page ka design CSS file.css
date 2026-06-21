@@ -206,6 +206,16 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
     perspective: 1000px;
+    margin-bottom: 2rem;
+}
+
+/* Ensure hero sticker visibility */
+.hero-right img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
 }
 
 .card {
@@ -254,7 +264,13 @@
 }
 
 .card:hover .img-container img {
-    transform: scale(1.08);
+    transform: scale(1.04);
+}
+
+/* Footer spacing */
+.footer-grid {
+    margin-top: 2rem;
+    gap: 2rem;
 }
 
 .status-badge {
