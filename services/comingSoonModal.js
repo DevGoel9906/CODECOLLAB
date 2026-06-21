@@ -27,32 +27,41 @@
         position: fixed;
         inset: 0;
         background: rgba(11, 15, 25, 0.7);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        z-index: 100000;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 1000000;
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
-        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         padding: 1.5rem;
       }
       .cc-cs-overlay.visible {
         opacity: 1;
       }
       .cc-cs-card {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(15, 23, 42, 0.45);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 24px;
         width: 100%;
         max-width: 480px;
         padding: 2.5rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
         transform: translateY(20px) scale(0.95);
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
         text-align: center;
         color: #f8fafc;
         font-family: 'Outfit', sans-serif;
+        position: relative;
+      }
+      .cc-cs-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(79, 195, 179, 0.06), transparent 60%);
+        pointer-events: none;
+        border-radius: 24px;
       }
       .cc-cs-overlay.visible .cc-cs-card {
         transform: translateY(0) scale(1);
@@ -67,7 +76,7 @@
         font-size: 1.6rem;
         font-weight: 800;
         margin-bottom: 1rem;
-        background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
+        background: linear-gradient(135deg, #fff 0%, #4FC3B3 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -78,21 +87,21 @@
         margin-bottom: 2rem;
       }
       .cc-cs-btn {
-        background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
-        color: white;
+        background: linear-gradient(135deg, #4FC3B3 0%, #2f9486 100%);
+        color: #0b0f19;
         border: none;
-        padding: 0.75rem 2rem;
+        padding: 0.75rem 2.2rem;
         border-radius: 12px;
         font-weight: 600;
         font-size: 0.95rem;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+        box-shadow: 0 4px 12px rgba(79, 195, 179, 0.25);
         outline: none;
       }
       .cc-cs-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        box-shadow: 0 6px 20px rgba(79, 195, 179, 0.45);
       }
       .cc-cs-btn:active {
         transform: translateY(0);

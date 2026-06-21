@@ -4,47 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Details | CodeCollab</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Central design system CSS -->
+    <link rel="stylesheet" href="../design_system.css">
+    <!-- Project detail page CSS -->
     <link rel="stylesheet" href="project detail page ka design CSS file.css">
 </head>
 <body>
 
-    <div class="cursor"></div>
+    <!-- Custom interactive cursor -->
+    <div class="cursor">
+        <div class="cursor-dot"></div>
+    </div>
 
+    <!-- Background blobs -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <nav>
-        <a href="../index.html" class="logo">CodeCollab</a>
-        <div class="nav-links">
-            <a href="../user_dashboard_system/index.html" style="color: var(--accent); text-decoration: none; margin-right: 20px;">My Dashboard</a>
-            <a href="../index.html" style="color: var(--text-muted); text-decoration: none;">Back to Projects</a>
-        </div>
-    </nav>
+    <!-- Floating Navigation Dock -->
+    <div class="dock-wrapper">
+        <nav class="dock" id="floating-dock">
+            <!-- Dynamically populated by details JS script -->
+        </nav>
+    </div>
 
+    <!-- MAIN TWO-COLUMN DETAILS LAYOUT -->
     <div class="container">
-        <!-- Main Detail Section -->
-        <div class="glass-panel reveal">
-            <div class="detail-header">
-                <img id="project-img" src="" alt="Project Image">
-                <h1 id="project-title">Project Title</h1>
-                <div class="meta" id="project-tags">
-                    <!-- Tags injected here -->
+        
+        <!-- Left column: full description and details -->
+        <main class="detail-main reveal">
+            <div class="glass-panel main-panel">
+                <div class="img-banner-container">
+                    <img id="project-img" src="" alt="Project cover photo">
                 </div>
-            </div>
-            <div class="description" id="project-desc">
-                <!-- Description injected here -->
-            </div>
-        </div>
+                
+                <div class="detail-header-info">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+                        <div>
+                            <h1 id="project-title">Project Title</h1>
+                            <div class="project-id-badge" id="project-id">PRJ-000000</div>
+                        </div>
+                        <div id="status-badge-container">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
 
-        <!-- Sidebar Section -->
-        <aside class="sidebar reveal" style="animation-delay: 0.2s;">
-            <div class="glass-panel">
-                <div class="stats">
+                    <div class="tags" id="project-tags" style="margin-top:1rem;">
+                        <!-- Tech stacks tags injected here -->
+                    </div>
+                </div>
+
+                <div class="detail-body-section">
+                    <h3>Project Overview</h3>
+                    <div class="description" id="project-desc">
+                        <!-- Description injected here -->
+                    </div>
+                </div>
+
+                <!-- Required Skills section -->
+                <div class="detail-body-section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top:2rem; margin-top:2rem;">
+                    <h3>Required Skills</h3>
+                    <div class="tags" id="project-skills" style="margin-top:0.8rem;">
+                        <!-- Skills tags injected here -->
+                    </div>
+                </div>
+
+                <!-- Meeting Requests / Collaboration list section -->
+                <div class="detail-body-section" id="meeting-requests-section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top:2rem; margin-top:2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+                        <h3>Scheduled Meetings</h3>
+                        <button class="cc-btn cc-btn-primary" id="schedule-meeting-btn" style="font-size:0.88rem; padding:0.5rem 1.2rem;">Schedule Meeting</button>
+                    </div>
+                    <div id="meeting-list-container">
+                        <p style="color: var(--text-muted); font-size:0.9rem;">No meetings scheduled for this project yet.</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Right column: stats, actions, owner details -->
+        <aside class="detail-sidebar reveal" style="animation-delay: 0.15s;">
+            
+            <!-- Quick actions & stats -->
+            <div class="glass-panel sidebar-panel">
+                <h3 class="panel-title">Overview</h3>
+                
+                <div class="stats-row">
                     <div class="stat-box">
                         <span class="stat-val" id="stars-count">0</span>
                         <span class="stat-label">Stars</span>
@@ -55,91 +109,119 @@
                     </div>
                 </div>
 
-                <div style="margin-bottom: 2rem;">
-                    <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Development Progress</p>
-                    <div style="height: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; overflow: hidden;">
-                        <div id="progress-bar-inner" style="height: 100%; background: var(--accent); width: 60%;"></div>
+                <div class="progress-section">
+                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-muted);">Development Progress</span>
+                        <span id="progress-pct" style="color: var(--accent); font-weight:700;">0%</span>
                     </div>
-                    <p style="text-align: right; margin-top: 0.5rem; color: var(--accent); font-weight: 700;" id="progress-pct">0%</p>
+                    <div class="progress-bar-container">
+                        <div id="progress-bar-inner" class="progress-bar-fill"></div>
+                    </div>
                 </div>
 
-                <button class="btn-primary" id="join-project-btn">Join This Project</button>
-                <button class="btn-primary" id="schedule-meeting-btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); margin-top: 0.5rem; color: white;">Schedule Meeting</button>
-                <button class="btn-outline" id="github-btn" style="margin-top: 0.5rem;">View on GitHub</button>
-
-                <div class="contributor-list">
-                    <h4 style="margin-bottom: 1rem;">Core Maintainers</h4>
-                    <div id="maintainers-container">
-                        <!-- Populated by JavaScript -->
-                    </div>
+                <div class="sidebar-actions-group">
+                    <button class="cc-btn cc-btn-primary" id="join-project-btn" style="width:100%;">Join Project</button>
+                    <button class="cc-btn cc-btn-outline" id="github-btn" style="width:100%;">View on GitHub</button>
                 </div>
             </div>
+
+            <!-- Project ownership details -->
+            <div class="glass-panel sidebar-panel" style="margin-top:1.5rem;">
+                <h3 class="panel-title">Project Owner</h3>
+                <div id="owner-info-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Core Maintainers -->
+            <div class="glass-panel sidebar-panel" style="margin-top:1.5rem;">
+                <h3 class="panel-title">Core Maintainers</h3>
+                <div id="maintainers-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
         </aside>
+
     </div>
 
-    <div id="demo-popup" class="modal-overlay hidden">
-        <div class="modal-card">
-            <button class="modal-close" aria-label="Close demo notice">×</button>
-            <h2>This is demo project</h2>
-            <p>Actions are disabled for demo entries. Please try another project or explore the main page.</p>
+    <!-- POPUP NOTICES (GLASSMORPHIC REDESIGNS) -->
+    
+    <!-- Demo limitations popup -->
+    <div id="demo-popup" class="cc-modal-overlay">
+        <div class="cc-modal-card" style="text-align: center;">
+            <button class="cc-modal-close" id="demo-close-btn">&times;</button>
+            <div style="font-size:3rem; margin-bottom: 1.5rem;">⚙️</div>
+            <h2 style="font-size:1.5rem; font-weight:800; margin-bottom:1rem; color: var(--accent);">Demo Project Mode</h2>
+            <p style="color: var(--text-muted); margin-bottom:2rem; line-height: 1.6;">Actions are disabled for static demo project templates. Please try creating a new project of your own or explore available tools.</p>
+            <button class="cc-btn cc-btn-primary" id="demo-ok-btn" style="width:100%;">Acknowledge</button>
         </div>
     </div>
 
-    <div id="join-popup" class="modal-overlay hidden">
-        <div class="modal-card">
-            <button class="modal-close" aria-label="Close">×</button>
-            <h2>✓ Request Sent!</h2>
-            <p>Your request to join has been sent to the project admin.</p>
+    <!-- Application Confirmation -->
+    <div id="join-popup" class="cc-modal-overlay">
+        <div class="cc-modal-card" style="text-align: center;">
+            <button class="cc-modal-close" id="join-close-btn">&times;</button>
+            <div style="font-size:3.2rem; color: var(--accent); margin-bottom: 1rem;">✓</div>
+            <h2 style="font-size:1.5rem; font-weight:800; margin-bottom:1rem; color: var(--accent);">Request Submitted</h2>
+            <p style="color: var(--text-muted); margin-bottom:2rem; line-height:1.6;">Your application to join the team has been successfully filed. The project owner has been notified and will review your developer credentials.</p>
+            <button class="cc-btn cc-btn-primary" id="join-ok-btn" style="width:100%;">Got it</button>
         </div>
     </div>
 
-    <!-- Schedule Meeting Modal -->
-    <div id="meeting-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
-        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); width: 90%; max-width: 500px; position: relative;">
-            <button id="meeting-close-icon" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
-            <h2 style="margin-bottom: 1rem;">Schedule Meeting</h2>
-            <form id="meeting-form" style="display: flex; flex-direction: column; gap: 1rem;">
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label for="meeting-maintainer" style="text-align: left;">Select Maintainer</label>
-                    <select id="meeting-maintainer" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
-                        <!-- Options injected via JS -->
+    <!-- Dynamic Schedule Meeting Form Modal -->
+    <div id="meeting-modal" class="cc-modal-overlay">
+        <div class="cc-modal-card">
+            <button class="cc-modal-close" id="meeting-close-icon">&times;</button>
+            <h2 style="font-size:1.4rem; font-weight:800; color: var(--accent); margin-bottom:1.5rem; text-align:center;">Schedule Maintainer Meeting</h2>
+            
+            <form id="meeting-form">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="meeting-maintainer">Select Maintainer</label>
+                    <select id="meeting-maintainer" class="cc-select" required>
+                        <!-- Injected dynamically -->
                     </select>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label for="meeting-topic" style="text-align: left;">Topic</label>
-                    <input type="text" id="meeting-topic" placeholder="e.g. Frontend Contribution Discussion" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="meeting-topic">Meeting Topic</label>
+                    <input type="text" id="meeting-topic" class="cc-input" placeholder="e.g. Discuss frontend tasks" required>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label for="meeting-desc" style="text-align: left;">Description</label>
-                    <textarea id="meeting-desc" rows="3" placeholder="I would like to discuss..." required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white; resize: vertical;"></textarea>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="meeting-desc">Topic Description</label>
+                    <textarea id="meeting-desc" class="cc-textarea" rows="3" placeholder="Explain what details you wish to align on..." required></textarea>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label for="meeting-name" style="text-align: left;">Your Name</label>
-                    <input type="text" id="meeting-name" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
+                <div class="cc-form-row">
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="meeting-name">Your Name</label>
+                        <input type="text" id="meeting-name" class="cc-input" required>
+                    </div>
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="meeting-email">Your Email</label>
+                        <input type="email" id="meeting-email" class="cc-input" required>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <label for="meeting-email" style="text-align: left;">Your Email</label>
-                    <input type="email" id="meeting-email" required style="padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
-                </div>
-                <button type="submit" class="btn-primary" style="margin-top: 1rem; width: 100%; padding: 1rem;">Submit Request</button>
+                <button type="submit" class="cc-btn cc-btn-primary" style="width:100%; margin-top:1.2rem;">Submit Request</button>
             </form>
         </div>
     </div>
 
-    <!-- Meeting Success Modal -->
-    <div id="meeting-success-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
-        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); text-align: center; max-width: 400px; width: 90%;">
-            <h2 style="margin-bottom: 1rem;">Request Submitted</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Your meeting request has been successfully sent. The selected maintainer will review your request and contact you via email with further details as soon as possible.</p>
-            <button id="meeting-success-ok-btn" class="btn-primary" style="padding: 0.5rem 1.5rem;">OK</button>
+    <!-- Meeting Success Acknowledgement -->
+    <div id="meeting-success-modal" class="cc-modal-overlay">
+        <div class="cc-modal-card" style="text-align: center;">
+            <div style="font-size:3rem; margin-bottom:1rem;">📅</div>
+            <h2 style="font-size:1.4rem; font-weight:800; color:var(--accent); margin-bottom:1rem;">Request Filed Successfully</h2>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem;">Your meeting request has been logged. The maintainer will inspect your credentials and message you regarding scheduling details.</p>
+            <button class="cc-btn cc-btn-primary" id="meeting-success-ok-btn" style="width:100%;">Understood</button>
         </div>
     </div>
 
-    <!-- Global Config & API Client (Security Architecture) -->
+    <!-- Centralized configuration scripts loading -->
     <script src="../services/config.js"></script>
     <script src="../services/securityModal.js"></script>
+    <script src="../services/comingSoonModal.js"></script>
     <script src="../services/apiClient.js"></script>
-
+    <script src="../services/profileModal.js"></script>
+    
     <script src="../data/project_database_file.js"></script>
     <script src="project detail page ka logic Javascript file.js"></script>
 </body>
