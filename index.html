@@ -3,62 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeCollab | Student Open Source Platform</title>
+    <title>CodeCollab | Student Open Source Collaboration Platform</title>
     
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <!-- Link to the CSS file with your requested name -->
+    <!-- Central design system CSS -->
+    <link rel="stylesheet" href="design_system.css">
+    <!-- Homepage specific CSS layout -->
     <link rel="stylesheet" href="main page ka design CSS file.css">
 </head>
 <body>
 
-    <!-- Custom Cursor -->
+    <!-- Custom interactive cursor -->
     <div class="cursor">
         <div class="cursor-dot"></div>
     </div>
 
-    <!-- Background Animated Blobs -->
+    <!-- Background depth blobs -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">CodeCollab</div>
-        <div class="nav-links">
-            <a href="user_dashboard_system/index.html">Dashboard</a>
-            <a href="#">Join us</a>
-            <a href="auth.html" id="login-btn" style="color: var(--accent);">Login</a>
-        </div>
-    </nav>
+    <!-- Floating modern dock-style navigation bar -->
+    <div class="dock-wrapper">
+        <nav class="dock" id="floating-dock">
+            <!-- Nav links are dynamically injected and synced by JS -->
+        </nav>
+    </div>
 
-
-    <!-- HERO SECTION -->
-    <header class="hero">
-        <h1 class="reveal-text">Build the Future, <br><span style="color: var(--accent);">Together.</span></h1>
-        <p class="reveal-text" style="animation-delay: 0.2s;">
-            A curated open-source collaboration platform specifically designed for students. 
-            Discover projects, find your coding buddy, and start contributing today.
-        </p>
-        <div class="reveal-text" style="animation-delay: 0.4s;">
-            <!-- Navigate to Add Project Page -->
-            <button onclick="window.location.href='admin_and_user_settings/add project page.html'" class="filter-btn active" style="padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 600;">+ Add Project</button>
+    <!-- HERO SECTION WITH LEFT-RIGHT VISUAL BALANCE -->
+    <header class="hero-section">
+        <div class="hero-grid">
+            
+            <!-- Left middle column: branding and main CTA -->
+            <div class="hero-left reveal">
+                <div class="brand-indicator">CODECOLLAB</div>
+                <h1>Build the Future, <br><span style="color: var(--accent);">Together.</span></h1>
+                <p>
+                    A curated open-source collaboration platform specifically designed for students. 
+                    Discover projects, find your coding buddy, and start contributing today.
+                </p>
+                <div class="hero-cta-group">
+                    <button onclick="window.location.href='admin_and_user_settings/add project page.html'" class="cc-btn cc-btn-primary">+ Add Project</button>
+                    <a href="#discovery-area" class="cc-btn cc-btn-outline" style="text-decoration: none;">Explore Projects</a>
+                </div>
+            </div>
+            
+            <!-- Right middle column: animated metal shader showcase container -->
+            <div class="hero-right reveal" style="animation-delay: 0.2s;">
+                <div class="shader-card-wrapper">
+                    <!-- Showcase WebGL Canvas -->
+                    <div class="shader-canvas-container" id="metallic-showcase-container">
+                        <!-- Loaded dynamically by stickerShader.js -->
+                    </div>
+                    
+                    <!-- WebGL Customizer Dashboard -->
+                    <div class="shader-controls-overlay">
+                        <div class="control-header">WebGL Shader customizer</div>
+                        <div class="control-grid">
+                            <div class="control-row">
+                                <label for="ctrl-aberration">Chromatic Aberration</label>
+                                <input type="range" id="ctrl-aberration" min="0" max="3" step="0.1" value="0.8">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-wavespeed">Wave Animation</label>
+                                <input type="range" id="ctrl-wavespeed" min="0" max="5" step="0.1" value="1.5">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-scale">Pattern Scale</label>
+                                <input type="range" id="ctrl-scale" min="0.5" max="2" step="0.05" value="1.0">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-rotation">Pattern Rotation</label>
+                                <input type="range" id="ctrl-rotation" min="-3.14" max="3.14" step="0.1" value="0.0">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-noise">Noise Distortion</label>
+                                <input type="range" id="ctrl-noise" min="0" max="1" step="0.05" value="0.15">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-brightness">Brightness Control</label>
+                                <input type="range" id="ctrl-brightness" min="0.5" max="2" step="0.05" value="1.0">
+                            </div>
+                            <div class="control-row">
+                                <label for="ctrl-contrast">Contrast Control</label>
+                                <input type="range" id="ctrl-contrast" min="0.5" max="2" step="0.05" value="1.0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- DISCOVERY AND PROJECT GRID AREA -->
     <main class="container" id="discovery-area">
-        <!-- Search and Filter Bar -->
-        <div class="reveal-text" style="animation-delay: 0.6s; margin-bottom: 3rem;">
-            <div style="max-width: 600px; margin: 0 auto 2rem; position: relative;">
-                <input type="text" id="project-search" placeholder="Search for projects, tech, or keywords..." 
-                    style="width: 100%; padding: 1.2rem 1.5rem; border-radius: 15px; background: var(--glass); border: 1px solid var(--glass-border); color: white; font-size: 1rem; backdrop-filter: blur(10px);">
-                <span style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); opacity: 0.5;">🔍</span>
+        <!-- Center search filter -->
+        <div class="reveal" style="animation-delay: 0.4s; margin-bottom: 3.5rem;">
+            <div style="max-width: 650px; margin: 0 auto 2.5rem; position: relative;">
+                <input type="text" id="project-search" class="cc-input" placeholder="Search for projects, tech stacks, or keywords..." style="padding: 1.3rem 1.6rem; font-size: 1.05rem;">
+                <span style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); opacity: 0.6; font-size: 1.2rem;">🔍</span>
             </div>
             
             <div class="filter-bar">
@@ -73,34 +123,147 @@
 
         <!-- Project Grid -->
         <div id="project-grid" class="grid">
-            <!-- Projects will be injected here by JavaScript -->
+            <!-- Projects injected by JS -->
         </div>
     </main>
 
-    <footer style="text-align: center; padding: 4rem; color: var(--text-muted); opacity: 0.6; font-size: 0.9rem;">
-        <p>&copy; 2026 CodeCollab. Built with &hearts; for students.</p>
+    <!-- FOOTER REDESIGN -->
+    <footer class="cc-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 style="background: linear-gradient(to right, var(--accent), var(--text-main)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight:800; font-size:1.4rem;">CodeCollab</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem; line-height: 1.6; max-width: 250px;">A premium student-centric open source cataloging and collaboration dashboard layer.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#discovery-area">Projects</a></li>
+                    <li><a href="user_dashboard_system/index.html">Dashboard</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Product Features" data-desc="Detailed metrics and automated team tracking tools will be available in the next major build.">Features</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="#" data-coming-soon="true" data-title="Contributor Directory" data-desc="A public directory featuring all student builders contributing to CodeCollab is in development.">Contributors</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Maintainer Access Hub" data-desc="Specialized guidelines and verification systems for project owners are being drafted.">Maintainers</a></li>
+                    <li><a href="https://github.com" target="_blank">Open Source</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#" data-coming-soon="true" data-title="Privacy Policy" data-desc="Your privacy matters. Our data treatment policy is being reviewed for compliance.">Privacy Policy</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Terms of Service" data-desc="Please review our workspace conduct rules. The formal terms of service will be available shortly.">Terms of Service</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Cookie Policy" data-desc="We use secure session storage for login. A full cookie policy report is under drafting.">Cookie Policy</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Liability Disclaimer" data-desc="CodeCollab is an educational tool. We host links to external projects and accept no liability for external codes.">Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#" data-coming-soon="true" data-title="Developer Support" data-desc="Need help? Our ticketing service and email helpdesk is launch ready soon.">Support</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Submit Feedback" data-desc="Your feature requests help us improve. An interactive feedback portal is in design.">Feedback</a></li>
+                    <li><a href="#" data-coming-soon="true" data-title="Report Issue" data-desc="Found a security threat or bug? Please report it directly to admin@codecollab.org.">Report Issue</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CodeCollab. Built with &hearts; for developers worldwide.</p>
+        </div>
     </footer>
 
-    <!-- Login Coming Soon Modal -->
-    <div id="login-modal" class="modal-overlay hidden" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;">
-        <div class="modal-card" style="background: var(--glass); padding: 2rem; border-radius: 20px; border: 1px solid var(--glass-border); text-align: center; max-width: 400px; width: 90%;">
-            <h2 style="margin-bottom: 1rem;">Authentication Coming Soon</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">User authentication is currently under development and will be available in an upcoming release.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <button id="login-ok-btn" class="filter-btn active" style="padding: 0.5rem 1.5rem;">OK</button>
-                <button id="login-close-btn" class="filter-btn" style="padding: 0.5rem 1.5rem;">Close</button>
+    <!-- GLASSMORPHISM AUTHENTICATION MODAL -->
+    <div class="cc-modal-overlay" id="auth-modal-overlay">
+        <div class="cc-modal-card">
+            <!-- Close trigger -->
+            <button class="cc-modal-close" id="auth-modal-close">&times;</button>
+            
+            <!-- Auth form switcher -->
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="tab-signin">Sign In</div>
+                <div class="auth-tab" id="tab-signup">Register Profile</div>
             </div>
+            
+            <div class="cc-alert" id="auth-modal-alert"></div>
+            
+            <!-- ── Sign In panel ── -->
+            <form id="auth-signin-form">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="auth-signin-email">Email Address</label>
+                    <input type="email" id="auth-signin-email" class="cc-input" placeholder="name@example.com" required autocomplete="email">
+                </div>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="auth-signin-password">Password</label>
+                    <input type="password" id="auth-signin-password" class="cc-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <div style="text-align: right; margin-bottom: 1.5rem;">
+                    <a href="javascript:void(0)" id="auth-forgot-btn" class="forgot-link" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="cc-btn cc-btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            
+            <!-- ── Sign Up panel ── -->
+            <form id="auth-signup-form" style="display: none;">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="auth-signup-name">Full Name</label>
+                    <input type="text" id="auth-signup-name" class="cc-input" placeholder="Alex Carter" required>
+                </div>
+                <div class="cc-form-row">
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-username">Username <span style="font-weight:300; font-size:0.75rem;">(Optional)</span></label>
+                        <input type="text" id="auth-signup-username" class="cc-input" placeholder="alexcarter">
+                    </div>
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-role">Workspace Role</label>
+                        <select id="auth-signup-role" class="cc-select" required>
+                            <option value="" disabled selected>Select Role</option>
+                            <option value="Student">Student</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Maintainer">Maintainer</option>
+                            <option value="Contributor">Contributor</option>
+                            <option value="Designer">Designer</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="auth-signup-email">Email Address</label>
+                    <input type="email" id="auth-signup-email" class="cc-input" placeholder="alex@university.edu" required autocomplete="email">
+                </div>
+                <div class="cc-form-row">
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-github">GitHub Profile URL</label>
+                        <input type="url" id="auth-signup-github" class="cc-input" placeholder="https://github.com/alexcarter">
+                    </div>
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-linkedin">LinkedIn Profile URL</label>
+                        <input type="url" id="auth-signup-linkedin" class="cc-input" placeholder="https://linkedin.com/in/alex">
+                    </div>
+                </div>
+                <div class="cc-form-row">
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-password">Password</label>
+                        <input type="password" id="auth-signup-password" class="cc-input" placeholder="••••••••" required autocomplete="new-password">
+                    </div>
+                    <div class="cc-form-group">
+                        <label class="cc-label" for="auth-signup-confirm">Confirm Password</label>
+                        <input type="password" id="auth-signup-confirm" class="cc-input" placeholder="••••••••" required autocomplete="new-password">
+                    </div>
+                </div>
+                <button type="submit" class="cc-btn cc-btn-primary" style="width: 100%; margin-top: 1rem;">Register Workspace</button>
+            </form>
         </div>
     </div>
 
-
-
-    <!-- Database and Logic -->
-    <!-- Global Config & API Client (Security Architecture) -->
+    <!-- Centralized configuration scripts loading -->
     <script src="services/config.js"></script>
     <script src="services/securityModal.js"></script>
+    <script src="services/comingSoonModal.js"></script>
     <script src="services/apiClient.js"></script>
-
+    <script src="services/stickerShader.js"></script>
+    <script src="services/profileModal.js"></script>
+    
     <script src="data/project_database_file.js"></script>
     <script src="main page ka backend Javascript file.js"></script>
 </body>

@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | CodeCollab</title>
+    
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Design system CSS -->
+    <link rel="stylesheet" href="../design_system.css">
+    <!-- Dashboard page CSS -->
     <link rel="stylesheet" href="dashboard page ka design CSS file.css">
 </head>
 <body>
@@ -15,7 +20,7 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
         <a href="../index.html" class="logo">CodeCollab</a>
-        <nav>
+        <nav style="display:flex; flex-direction:column; gap:0.5rem;">
             <a href="#" class="nav-item active">
                 <span>📊</span> Dashboard
             </a>
@@ -24,6 +29,9 @@
             </a>
             <a href="../admin_and_user_settings/index.html" class="nav-item">
                 <span>🛠️</span> Manage Requests
+            </a>
+            <a href="javascript:void(0)" class="nav-item" id="sidebar-profile-btn" style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem; margin-top: 1.5rem;">
+                <span>👤</span> Profile Settings
             </a>
         </nav>
         
@@ -38,10 +46,9 @@
     <main class="main-content">
         <header class="header fade-in" style="justify-content: flex-start;">
             <div>
-                <h1>Welcome Back</h1>
-                <p id="user-bio" style="color: var(--text-muted);">Here's how your project collaborations are doing.</p>
+                <h1 style="font-size:2.5rem; font-weight:800; color:var(--text-main); margin-bottom: 0.5rem;">Dashboard Workspace</h1>
+                <p id="user-bio" style="color: var(--text-muted); font-size:1rem;"></p>
             </div>
-
         </header>
 
         <!-- Stats Grid -->
@@ -52,27 +59,29 @@
             </div>
             <div class="stat-card fade-in" style="animation-delay: 0.2s;">
                 <span class="stat-title">Pending</span>
-                <span class="stat-num" id="pending-req" style="color: #ffc107;">0</span>
+                <span class="stat-num" id="pending-req" style="color: #fbbf24;">0</span>
             </div>
             <div class="stat-card fade-in" style="animation-delay: 0.3s;">
                 <span class="stat-title">Accepted</span>
-                <span class="stat-num" id="accepted-req" style="color: #28a745;">0</span>
+                <span class="stat-num" id="accepted-req" style="color: var(--accent);">0</span>
             </div>
         </div>
 
         <!-- Project Status Section -->
-        <section class="fade-in" style="animation-delay: 0.4s;" id="project-status-section">
-            <h2 class="section-title">Project Status</h2>
-            <div id="project-status-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
+        <section class="fade-in" style="animation-delay: 0.4s; margin-top: 3rem;" id="project-status-section">
+            <h2 class="section-title">Project Applications</h2>
+            <div id="project-status-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
                 <!-- Content injected by JS -->
             </div>
         </section>
     </main>
 
-    <!-- Global Config & API Client (Security Architecture) -->
+    <!-- Centralized configuration scripts loading -->
     <script src="../services/config.js"></script>
     <script src="../services/securityModal.js"></script>
+    <script src="../services/comingSoonModal.js"></script>
     <script src="../services/apiClient.js"></script>
+    <script src="../services/profileModal.js"></script>
 
     <script src="dashboard page ka logic Javascript file.js"></script>
 </body>

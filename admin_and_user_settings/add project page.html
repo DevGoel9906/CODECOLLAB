@@ -3,44 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Project | CodeCollab</title>
+    <title>Launch New Project | CodeCollab</title>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../design_system.css">
+    <!-- Local form overrides -->
     <link rel="stylesheet" href="add project page ka design CSS file.css">
+    
     <script>
+        // Redirect to homepage login modal if user tries to launch a project while unauthenticated
         if (!localStorage.getItem('userId')) {
-            window.location.href = '../auth.html';
+            window.location.href = '../index.html?auth=login';
         }
     </script>
 </head>
 <body>
 
-    <div class="container">
-        <a href="../index.html" style="color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; display: inline-block;">← Back to Home</a>
+    <div class="container" style="max-width: 700px; margin: 4rem auto; padding: 0 1.5rem;">
+        <a href="../index.html" style="color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; display: inline-block; font-weight:550; transition: var(--transition);" onmouseenter="this.style.color='var(--accent)'" onmouseleave="this.style.color='var(--text-muted)'">← Back to Home</a>
         
-        <div class="glass-card">
-            <h1>Launch Your Project</h1>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Fill in the details to list your project on CodeCollab.</p>
+        <div class="glass-card" style="background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 2.5rem; backdrop-filter: blur(25px); box-shadow: var(--shadow-premium);">
+            <h1 style="font-size:2.2rem; font-weight:800; color:var(--text-main); margin-bottom: 0.5rem;">Launch Your Project</h1>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">Fill in the details to list your project template on CodeCollab.</p>
             
-            <div class="preview-container" id="image-preview">
-                <span></span>
-                <img id="preview-img" src="" alt="Preview">
+            <!-- Drag and drop image upload preview wrapper -->
+            <div class="preview-container" id="image-preview" style="width:100%; height: 200px; background: rgba(0,0,0,0.15); border: 2px dashed var(--glass-border); border-radius: var(--radius-md); display:flex; justify-content:center; align-items:center; overflow:hidden; margin-bottom: 1.5rem; transition: var(--transition);">
+                <span style="color:var(--text-muted); font-size:0.9rem;">Drag cover photo here or click files below</span>
+                <img id="preview-img" src="" alt="Preview image" style="display: none; width:100%; height:100%; object-fit:cover;">
             </div>
-            <p class="error-text hidden" id="image-error">Your image must be under 10MB and in JPG/PNG format.</p>
+            <p class="error-text hidden" id="image-error" style="color: #ff5f5f; font-size:0.85rem; margin-bottom:1rem;"></p>
 
             <form id="add-project-form">
-                <div class="form-group">
-                    <label for="p-creator">Your Name</label>
-                    <input type="text" id="p-creator" placeholder="e.g. John Doe" required>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-creator">Your Name</label>
+                    <input type="text" id="p-creator" class="cc-input" placeholder="e.g. John Doe" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-title">Project Title</label>
-                    <input type="text" id="p-title" placeholder="e.g. HealthTracker AI" required>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-title">Project Title</label>
+                    <input type="text" id="p-title" class="cc-input" placeholder="e.g. HealthTracker AI" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-category">Category</label>
-                    <select id="p-category">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-category">Category</label>
+                    <select id="p-category" class="cc-select">
                         <option value="Web">Web Development</option>
                         <option value="AI">Artificial Intelligence</option>
                         <option value="Security">Cyber Security</option>
@@ -49,53 +58,55 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-image-file">Upload Cover Image</label>
-                    <input type="file" id="p-image-file" accept="image/*">
-                    <small style="color: var(--text-muted);">Image files only. Max size 10MB.</small>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-image-file">Upload Cover Image</label>
+                    <input type="file" id="p-image-file" class="cc-input" accept="image/*" style="padding: 0.6rem 1.2rem;">
+                    <small style="color: var(--text-muted); font-size:0.8rem; margin-top:0.2rem; display:block;">Supported image types only. Maximum size 10MB.</small>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-github">GitHub Repository Link (URL)</label>
-                    <input type="url" id="p-github" placeholder="https://github.com/profile/repo" required>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-github">GitHub Repository Link (URL)</label>
+                    <input type="url" id="p-github" class="cc-input" placeholder="https://github.com/profile/repo" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-tech">Tech Stack (comma separated)</label>
-                    <input type="text" id="p-tech" placeholder="React, Python, Firebase" required>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-tech">Tech Stack (comma separated)</label>
+                    <input type="text" id="p-tech" class="cc-input" placeholder="React, Python, Firebase" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-desc">Short Description</label>
-                    <textarea id="p-desc" rows="3" placeholder="Explain what your project solves..." required></textarea>
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-desc">Short Description</label>
+                    <textarea id="p-desc" class="cc-textarea" rows="3" placeholder="Explain what your project solves..." required style="resize:vertical;"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="p-progress">Current Progress (%)</label>
-                    <input type="number" id="p-progress" min="0" max="100" value="0">
+                <div class="cc-form-group">
+                    <label class="cc-label" for="p-progress">Current Progress (%)</label>
+                    <input type="number" id="p-progress" class="cc-input" min="0" max="100" value="0">
                 </div>
 
-                <div class="form-group" id="maintainers-group">
-                    <label>Core Maintainers</label>
-                    <div id="maintainers-container">
-                        <div class="maintainer-entry" style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 10px; margin-bottom: 1rem; border: 1px solid var(--glass-border);">
-                            <input type="text" class="m-name" placeholder="Full Name" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
-                            <input type="url" class="m-linkedin" placeholder="LinkedIn Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
-                            <input type="url" class="m-github" placeholder="GitHub Profile URL" required style="margin-bottom: 0.5rem; width: 100%; padding: 0.8rem; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: white;">
-                            <button type="button" class="btn-remove-maintainer" style="background: #ff5f5f; color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; display: none;">Remove Maintainer</button>
+                <!-- Core maintainers dynamic entries -->
+                <div class="cc-form-group" id="maintainers-group" style="margin-top:1.5rem;">
+                    <label class="cc-label">Core Maintainers</label>
+                    <div id="maintainers-container" style="margin-top:0.5rem;">
+                        <div class="maintainer-entry" style="background: rgba(0,0,0,0.1); padding: 1.2rem; border-radius: var(--radius-md); margin-bottom: 1rem; border: 1px solid var(--glass-border); display:flex; flex-direction:column; gap:0.75rem;">
+                            <input type="text" class="m-name" placeholder="Full Name" required class="cc-input" style="width: 100%; padding: 0.7rem 1.1rem; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color: white; outline:none;">
+                            <input type="url" class="m-linkedin" placeholder="LinkedIn Profile URL" required class="cc-input" style="width: 100%; padding: 0.7rem 1.1rem; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color: white; outline:none;">
+                            <input type="url" class="m-github" placeholder="GitHub Profile URL" required class="cc-input" style="width: 100%; padding: 0.7rem 1.1rem; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color: white; outline:none;">
+                            <button type="button" class="btn-remove-maintainer cc-btn cc-btn-secondary" style="font-size:0.8rem; padding:0.4rem 1rem; align-self:flex-start; display: none;">Remove Maintainer</button>
                         </div>
                     </div>
-                    <button type="button" id="btn-add-maintainer" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--glass-border); padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">+ Add Maintainer</button>
+                    <button type="button" id="btn-add-maintainer" class="cc-btn cc-btn-outline" style="font-size:0.85rem; padding:0.5rem 1.2rem; align-self:flex-start;">+ Add Maintainer</button>
                 </div>
 
-                <button type="submit" class="btn-submit">Add Project to Platform</button>
+                <button type="submit" class="cc-btn cc-btn-primary" style="width:100%; margin-top:2rem; padding:1rem;">Add Project to Platform</button>
             </form>
         </div>
     </div>
 
-    <!-- Global Config & API Client (Security Architecture) -->
+    <!-- Centralized configuration scripts loading -->
     <script src="../services/config.js"></script>
     <script src="../services/securityModal.js"></script>
+    <script src="../services/comingSoonModal.js"></script>
     <script src="../services/apiClient.js"></script>
 
     <script src="add project page ka logic Javascript file.js"></script>

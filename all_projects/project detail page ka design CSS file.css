@@ -1,305 +1,258 @@
-/* 
-   File: project detail page ka design CSS file.css
-   Description: Design for the project details page
-*/
-
-:root {
-    --bg-dark: #021F2C;
-    --primary: #0C6A6E;
-    --secondary: #128C88;
-    --accent: #4FC3B3;
-    --accent-glow: rgba(79, 195, 179, 0.4);
-    --text-main: #AEEFE0;
-    --text-muted: #7FE0C8;
-    --glass: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
-}
-
-body {
-    background: var(--bg-dark);
-    color: var(--text-main);
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
-/* Background Blobs */
-.bg-blobs {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-    filter: blur(80px);
-}
-
-.blob {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: var(--primary);
-    opacity: 0.15;
-    animation: move 25s infinite alternate;
-}
-
-.blob-1 { top: -200px; right: -100px; }
-.blob-2 { bottom: -200px; left: -100px; background: var(--secondary); }
-
-@keyframes move {
-    from { transform: translate(0, 0); }
-    to { transform: translate(150px, 150px); }
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 5%;
-    background: rgba(2, 31, 44, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-decoration: none;
-    background: linear-gradient(to right, var(--accent), var(--text-main));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+/**
+ * all_projects/project detail page ka design CSS file.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CODECOLLAB — Project Details Styling Sheet
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 
 .container {
     max-width: 1200px;
-    margin: 4rem auto;
+    margin: 6.5rem auto 4rem;
     padding: 0 5%;
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3rem;
-}
-
-@media (max-width: 900px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 2.5rem;
 }
 
 .glass-panel {
-    background: var(--glass);
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(20px);
-    border-radius: 24px;
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+    transition: var(--transition);
+}
+
+.main-panel {
     padding: 2.5rem;
 }
 
-.detail-header img {
+.img-banner-container {
     width: 100%;
-    height: 350px;
+    height: 360px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 2.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.img-banner-container img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    border: 1px solid var(--glass-border);
 }
 
-h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.detail-header-info h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-main);
+}
+
+.project-id-badge {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.05);
+    width: fit-content;
+    margin-top: 0.5rem;
+}
+
+.detail-body-section {
+    margin-top: 2.2rem;
+}
+
+.detail-body-section h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--accent);
-}
-
-.meta {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.tag {
-    padding: 0.4rem 1rem;
-    background: rgba(12, 106, 110, 0.2);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.85rem;
 }
 
 .description {
-    line-height: 1.8;
+    line-height: 1.75;
     color: var(--text-muted);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    font-size: 1rem;
 }
 
-/* Sidebar Styling */
-.sidebar {
+/* Sidebar Specifics */
+.detail-sidebar {
     position: sticky;
-    top: 6rem;
+    top: 6.5rem;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.stats {
+.sidebar-panel {
+    padding: 1.8rem;
+}
+
+.panel-title {
+    font-size: 0.82rem;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 0.5rem;
+}
+
+.stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.8rem;
 }
 
 .stat-box {
-    padding: 1.5rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
     text-align: center;
 }
 
 .stat-val {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--accent);
 }
 
 .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.15rem;
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 1.2rem;
-    background: var(--accent);
-    color: var(--bg-dark);
-    border: none;
-    border-radius: 16px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-bottom: 1.5rem;
+.progress-section {
+    margin-bottom: 2rem;
 }
 
-.btn-primary:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px var(--accent-glow);
-}
-
-.btn-outline {
-    width: 100%;
-    padding: 1.2rem;
-    background: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-    border-radius: 16px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.btn-outline:hover {
-    background: rgba(79, 195, 179, 0.1);
-}
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    background: rgba(0, 0, 0, 0.65);
-    z-index: 10000;
-    padding: 1.5rem;
-}
-
-.modal-card {
-    width: min(520px, 100%);
-    background: rgba(2, 31, 44, 0.96);
-    border: 1px solid rgba(79, 195, 179, 0.2);
-    border-radius: 28px;
-    padding: 2rem;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(24px);
-    text-align: center;
-}
-
-.modal-card h2 {
-    margin-bottom: 1rem;
-    color: var(--accent);
-    font-size: 2rem;
-}
-
-.modal-card p {
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-size: 1rem;
-}
-
-.modal-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border: none;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-main);
-    font-size: 1.4rem;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-.contributor-list {
-    margin-top: 2rem;
-}
-
-.contributor {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--primary);
+.progress-bar-container {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    position: relative;
     overflow: hidden;
 }
 
-.avatar img {
-    width: 100%;
+.progress-bar-fill {
     height: 100%;
-    object-fit: cover;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    border-radius: 10px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Animations */
-.reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: revealAnim 0.8s forwards;
+.sidebar-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-@keyframes revealAnim {
-    to { opacity: 1; transform: translateY(0); }
+/* User & Maintainer lists */
+.owner-card, .contributor {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.6rem 0;
 }
 
-/* Cursor remains same */
-.cursor {
-    width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s ease-out;
+.contributor {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.contributor:last-child {
+    border-bottom: none;
+}
+
+.avatar-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-dark);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info .name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.profile-info .role-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.profile-links {
+    margin-top: 0.2rem;
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+}
+
+.profile-links a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.profile-links a:hover {
+    text-decoration: underline;
+}
+
+/* Meeting list items */
+.meeting-item {
+    background: rgba(255,255,255,0.01);
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 0.75rem;
+}
+
+.meeting-item h5 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.meeting-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Responsive breakdowns */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        margin-top: 5.5rem;
+    }
+    
+    .detail-sidebar {
+        position: relative;
+        top: 0;
+    }
 }

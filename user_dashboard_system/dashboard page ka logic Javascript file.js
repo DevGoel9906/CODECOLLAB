@@ -46,7 +46,7 @@ function getBadge(status) {
 
 // ── Check authentication status before rendering
 if (!currentUserId) {
-    window.location.href = '../auth.html';
+    window.location.href = '../index.html?auth=login';
 }
 
 // ──────────────────────────────────────────────
@@ -55,10 +55,18 @@ if (!currentUserId) {
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Load Profile bio
     const storedProfile = localStorage.getItem('codecollab_user_profile');
-    if (storedProfile) {
-        const profile = JSON.parse(storedProfile);
-        const bioEl = document.getElementById('user-bio');
-        if (bioEl) bioEl.textContent = profile.bio || "Here's how your project collaborations are doing.";
+    const profile = storedProfile ? JSON.parse(storedProfile) : {};
+    const bioEl = document.getElementById('user-bio');
+    if (bioEl) {
+        bioEl.textContent = profile.bio || "Here's how your project collaborations are doing.";
+    }
+
+    // Bind profile modal trigger
+    const sidebarProfileBtn = document.getElementById('sidebar-profile-btn');
+    if (sidebarProfileBtn && window.CodeCollabProfileCard) {
+        sidebarProfileBtn.addEventListener('click', () => {
+            window.CodeCollabProfileCard.show();
+        });
     }
 
     // 2. Load Join Requests from localStorage (or defaults)
@@ -143,7 +151,7 @@ function renderJoinRequests() {
             <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">${req.project}</h3>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">Applied: ${req.date}</p>
             ${getBadge(req.status)}
-            <button class="view-btn" style="margin-top:1.2rem; width:100%; padding:0.6rem; font-size:0.85rem;" onclick="alert('Request details coming soon!')">View Request</button>
+            <button class="view-btn" style="margin-top:1.2rem; width:100%; padding:0.6rem; font-size:0.85rem;" onclick="window.CodeCollabComingSoon.show('Request Details Coming Soon', 'Detailed tracking of your request is under development and will be available in a future update.', '📊')">View Request</button>
         `;
         grid.appendChild(card);
     });

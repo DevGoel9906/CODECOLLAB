@@ -138,10 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const maintainerEntries = document.querySelectorAll('.maintainer-entry');
         const maintainers = [];
         maintainerEntries.forEach(entry => {
+            const name = entry.querySelector('.m-name').value.trim();
+            const linkedin = entry.querySelector('.m-linkedin').value.trim();
+            const github = entry.querySelector('.m-github').value.trim();
+            if (!name || !linkedin || !github) {
+                showError('All maintainer fields are required.');
+                return;
+            }
             maintainers.push({
-                name: entry.querySelector('.m-name').value,
-                linkedin: entry.querySelector('.m-linkedin').value,
-                github: entry.querySelector('.m-github').value
+                name,
+                linkedin,
+                github
             });
         });
 
@@ -164,6 +171,21 @@ document.addEventListener('DOMContentLoaded', () => {
             techStack: document.getElementById('p-tech').value.split(',').map(t => t.trim()),
             ownerId: ownerId,
         };
+
+        // Read tags input (comma separated)
+        const tagsInput = document.getElementById('p-tags');
+        const tags = tagsInput ? tagsInput.value.split(',').map(t => t.trim()).filter(t => t) : [];
+        payload.tags = tags;
+
+        // Enforce unique project title (client‑side)
+        const stored = localStorage.getItem('user_added_projects');
+        if (stored) {
+            const projects = JSON.parse(stored);
+            if (projects.some(p => p.title === payload.title)) {
+                showError('Project title must be unique.');
+                return;
+            }
+        }
 
         try {
             await window.apiClient.post('/projects', payload);
@@ -199,6 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.style.background = "#0C6A6E";
 
         setTimeout(() => {
+            if (window.CodeCollabSecurity && typeof window.CodeCollabSecurity.requireAuth === 'function') {
+                window.CodeCollabSecurity.requireAuth();
+            }
             window.location.href = "../index.html";
         }, 1500);
     });
