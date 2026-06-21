@@ -165,29 +165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderDock();
 
     // ── 3. INTERACTIVE WEBGL STICKER SHADER INTEGRATION ───────────────────────
-    if (window.CodeCollabStickerShader) {
-        window.CodeCollabStickerShader.init('metallic-showcase-container', 'sticker.png');
 
-        // Bind WebGL Customizer slider controls to uniforms updates
-        const inputs = [
-            { id: 'ctrl-aberration', name: 'chromaticAberration' },
-            { id: 'ctrl-wavespeed', name: 'waveSpeed' },
-            { id: 'ctrl-scale', name: 'scale' },
-            { id: 'ctrl-rotation', name: 'rotation' },
-            { id: 'ctrl-noise', name: 'noise' },
-            { id: 'ctrl-brightness', name: 'brightness' },
-            { id: 'ctrl-contrast', name: 'contrast' }
-        ];
-
-        inputs.forEach(slider => {
-            const el = document.getElementById(slider.id);
-            if (el) {
-                el.addEventListener('input', (e) => {
-                    window.CodeCollabStickerShader.setUniform(slider.name, e.target.value);
-                });
-            }
-        });
-    }
 
     // ── 4. CENTRAL GLASSMORPHISM AUTHENTICATION MODAL ─────────────────────────
     const authOverlay = document.getElementById('auth-modal-overlay');
